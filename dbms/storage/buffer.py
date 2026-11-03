@@ -96,6 +96,21 @@ class BufferPool:
         frame.data[:] = bytes(PAGE_SIZE)
         return self.install(frame, (disk, disk.allocate_page()), dirty=True)
 
+    def reserve_frame(self, owner: object) -> Frame:
+        """Pin an empty frame as operator working memory (no disk I/O counted)."""
+        frame = self.take_victim()
+        frame.key = None
+        frame.data[:] = bytes(PAGE_SIZE)
+        return self.install(frame, ('scratch', id(owner), frame.index), dirty=False)
+
+    def release_frame(self, frame: Frame) -> None:
+        del self.page_table[frame.key]
+        frame.key = None
+        frame.pin_count = 0
+
+    def free_frames(self) -> int:
+        return len(self.frames) - self.pinned()
+
     def unpin_page(self, disk, page_id: int, is_dirty: bool) -> None:
         index = self.page_table.get((disk, page_id))
         if index is None:

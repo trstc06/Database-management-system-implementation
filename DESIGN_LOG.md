@@ -17,3 +17,12 @@ AI mistakes:
 
 - The AI's catalog saved new counts by deleting and reinserting the table's record, which changed the table order after every load. A test caught it (`['S', 'R']` instead of `['R', 'S']`). I now overwrite the record in place.
 - The AI's `scan --limit` called `close()` on an `islice`, which crashed. I found it running the commands by hand and fixed it to close the scan itself.
+
+## 2026-11-03: Module 2
+
+I built every operator in Section 2 and the `exec` command. All working memory is pinned frames in the one buffer pool, so a plan can't go over B. My sort makes runs of B − 1 pages because the input page uses a frame. That changes the Section 2.5 example, so I wrote my own numbers in `docs/DESIGN_M2.md`.
+
+AI mistakes:
+
+- The AI's sort told its parent how many pages it was using instead of how many frames it was holding. A sort over an empty table holds 1 frame but said 0, so a sort merge join at B = 4 handed out a frame it didn't have. The empty input test caught it.
+- When a hash group by had to split a partition again, the AI's code kept every new partition open while it worked on the first one. At B = 4 that ran out of frames. I now finish all of them before going into any.

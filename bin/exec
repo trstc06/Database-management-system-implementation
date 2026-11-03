@@ -1,0 +1,4 @@
+#!/bin/sh
+# Module 2 execution engine. Run as ./bin/exec (exec is a shell builtin).
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m dbms.execution.cli "$@"

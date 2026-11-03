@@ -16,6 +16,9 @@ python3 -m unittest discover -s tests -t .
 ./bin/storage layout --db db --table R --page 1
 ./bin/storage trace --file trace.txt --frames 16 --policy clock --json
 python3 -m experiments.m1_measure --out experiments/results/m1.json
+./bin/exec run --db db --plan plan.json --frames 32 --json
+./bin/exec trace --db db --plan plan.json --frames 32
+python3 -m experiments.m2_measure --out experiments/results/m2.json --plot docs/m2_crossover.svg
 ```
 
 Each tool in `bin/` is a short script that runs the matching Python module. Run them with their path, like `./bin/storage`. This matters most for `exec`, because typing just `exec` runs the shell's own `exec` command instead of mine.
@@ -27,9 +30,10 @@ Each tool in `bin/` is a short script that runs the matching Python module. Run 
 | `dbms/common/` | Errors, column types and column name lookup, shared by every module |
 | `dbms/ra/` | My Bonus 1 engine, split up so other modules can use it |
 | `dbms/storage/` | Module 1: pages, the buffer pool, heap files, the catalog and the CSV loader |
+| `dbms/execution/` | Module 2: operators, external sort, the three joins and the plan runner |
 | `experiments/` | Scripts that produce every number in my reports |
 | `tests/` | Tests, one folder per module |
 | `docs/` | Design documents and reports |
 | `DESIGN_LOG.md` | What I tried, what broke, and where AI help was wrong |
 
-`docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1.
+`docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1, and `docs/DESIGN_M2.md` and `docs/REPORT_M2.md` cover Module 2.

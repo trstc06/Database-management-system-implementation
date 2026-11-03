@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="330" font-family="sans-serif" font-size="11"><rect width="100%" height="100%" fill="white"/>
+<text x="210.0" y="20" text-anchor="middle" font-size="13">Cost vs B (M = N = 32 pages)</text>
+<line x1="50" y1="250" x2="370" y2="250" stroke="black"/>
+<line x1="50" y1="50" x2="50" y2="250" stroke="black"/>
+<text x="50.0" y="265" text-anchor="middle">4</text>
+<text x="96.79700005769249" y="265" text-anchor="middle">6</text>
+<text x="130.0" y="265" text-anchor="middle">8</text>
+<text x="176.7970000576925" y="265" text-anchor="middle">12</text>
+<text x="210.0" y="265" text-anchor="middle">16</text>
+<text x="290.0" y="265" text-anchor="middle">32</text>
+<text x="370.0" y="265" text-anchor="middle">64</text>
+<text x="210.0" y="288" text-anchor="middle">B (log scale)</text>
+<text x="12" y="40">page I/O (log)</text>
+<polyline points="50.0,50.4 96.8,70.4 130.0,78.4 176.8,89.0 210.0,96.0 290.0,105.1 370.0,117.9" fill="none" stroke="#c0392b" stroke-width="2"/>
+<polyline points="50.0,50.0 96.8,63.0 130.0,67.9 176.8,83.9 210.0,83.9 290.0,83.9 370.0,96.5" fill="none" stroke="#2471a3" stroke-width="2"/>
+<polyline points="50.0,51.6 96.8,60.3 130.0,81.4 176.8,81.4 210.0,79.3 290.0,74.9 370.0,68.3" fill="none" stroke="#1e8449" stroke-width="2"/>
+<text x="630.0" y="20" text-anchor="middle" font-size="13">Cost vs size (B = 8)</text>
+<line x1="470" y1="250" x2="790" y2="250" stroke="black"/>
+<line x1="470" y1="50" x2="470" y2="250" stroke="black"/>
+<text x="470.0" y="265" text-anchor="middle">4</text>
+<text x="539.7933734353701" y="265" text-anchor="middle">8</text>
+<text x="609.5867468707402" y="265" text-anchor="middle">16</text>
+<text x="679.3801203061103" y="265" text-anchor="middle">32</text>
+<text x="749.1734937414803" y="265" text-anchor="middle">64</text>
+<text x="790.0" y="265" text-anchor="middle">96</text>
+<text x="630.0" y="288" text-anchor="middle">pages (log scale)</text>
+<text x="432" y="40">page I/O (log)</text>
+<polyline points="470.0,187.8 539.8,161.0 609.6,136.1 679.4,103.1 749.2,70.2 790.0,50.0" fill="none" stroke="#c0392b" stroke-width="2"/>
+<polyline points="470.0,172.0 539.8,144.4 609.6,126.2 679.4,94.1 749.2,75.5 790.0,64.5" fill="none" stroke="#2471a3" stroke-width="2"/>
+<polyline points="470.0,149.1 539.8,136.9 609.6,123.6 679.4,106.2 749.2,69.2 790.0,60.7" fill="none" stroke="#1e8449" stroke-width="2"/>
+<text x="60" y="320" fill="#c0392b">nested_loop_join</text>
+<text x="260" y="320" fill="#2471a3">sort_merge_join</text>
+<text x="460" y="320" fill="#1e8449">hash_join</text>
+</svg>

@@ -1,0 +1,656 @@
+{
+ "costs": [
+  {
+   "join": "nested_loop_join",
+   "M": 8,
+   "N": 8,
+   "B": 4,
+   "reads": 45,
+   "writes": 0,
+   "measured": 45,
+   "formula": 40,
+   "output": 160
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 8,
+   "N": 8,
+   "B": 4,
+   "reads": 50,
+   "writes": 32,
+   "measured": 82,
+   "formula": 80,
+   "output": 160
+  },
+  {
+   "join": "hash_join",
+   "M": 8,
+   "N": 8,
+   "B": 4,
+   "reads": 36,
+   "writes": 18,
+   "measured": 54,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 8,
+   "N": 8,
+   "B": 16,
+   "reads": 18,
+   "writes": 0,
+   "measured": 18,
+   "formula": 16,
+   "output": 160
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 8,
+   "N": 8,
+   "B": 16,
+   "reads": 26,
+   "writes": 8,
+   "measured": 34,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "hash_join",
+   "M": 8,
+   "N": 8,
+   "B": 16,
+   "reads": 48,
+   "writes": 30,
+   "measured": 78,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 8,
+   "N": 8,
+   "B": 64,
+   "reads": 18,
+   "writes": 0,
+   "measured": 18,
+   "formula": 16,
+   "output": 160
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 8,
+   "N": 8,
+   "B": 64,
+   "reads": 18,
+   "writes": 0,
+   "measured": 18,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "hash_join",
+   "M": 8,
+   "N": 8,
+   "B": 64,
+   "reads": 132,
+   "writes": 114,
+   "measured": 246,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 8,
+   "N": 8,
+   "B": 256,
+   "reads": 18,
+   "writes": 0,
+   "measured": 18,
+   "formula": 16,
+   "output": 160
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 8,
+   "N": 8,
+   "B": 256,
+   "reads": 18,
+   "writes": 0,
+   "measured": 18,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "hash_join",
+   "M": 8,
+   "N": 8,
+   "B": 256,
+   "reads": 189,
+   "writes": 171,
+   "measured": 360,
+   "formula": 48,
+   "output": 160
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 32,
+   "N": 32,
+   "B": 4,
+   "reads": 561,
+   "writes": 0,
+   "measured": 561,
+   "formula": 544,
+   "output": 589
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 32,
+   "N": 32,
+   "B": 4,
+   "reads": 317,
+   "writes": 251,
+   "measured": 568,
+   "formula": 448,
+   "output": 589
+  },
+  {
+   "join": "hash_join",
+   "M": 32,
+   "N": 32,
+   "B": 4,
+   "reads": 317,
+   "writes": 211,
+   "measured": 528,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 32,
+   "N": 32,
+   "B": 16,
+   "reads": 132,
+   "writes": 0,
+   "measured": 132,
+   "formula": 128,
+   "output": 589
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 32,
+   "N": 32,
+   "B": 16,
+   "reads": 130,
+   "writes": 64,
+   "measured": 194,
+   "formula": 320,
+   "output": 589
+  },
+  {
+   "join": "hash_join",
+   "M": 32,
+   "N": 32,
+   "B": 16,
+   "reads": 144,
+   "writes": 78,
+   "measured": 222,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 32,
+   "N": 32,
+   "B": 64,
+   "reads": 66,
+   "writes": 0,
+   "measured": 66,
+   "formula": 64,
+   "output": 589
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 32,
+   "N": 32,
+   "B": 64,
+   "reads": 98,
+   "writes": 32,
+   "measured": 130,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "hash_join",
+   "M": 32,
+   "N": 32,
+   "B": 64,
+   "reads": 192,
+   "writes": 126,
+   "measured": 318,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 32,
+   "N": 32,
+   "B": 256,
+   "reads": 66,
+   "writes": 0,
+   "measured": 66,
+   "formula": 64,
+   "output": 589
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 32,
+   "N": 32,
+   "B": 256,
+   "reads": 66,
+   "writes": 0,
+   "measured": 66,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "hash_join",
+   "M": 32,
+   "N": 32,
+   "B": 256,
+   "reads": 461,
+   "writes": 395,
+   "measured": 856,
+   "formula": 192,
+   "output": 589
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 96,
+   "N": 96,
+   "B": 4,
+   "reads": 4753,
+   "writes": 0,
+   "measured": 4753,
+   "formula": 4704,
+   "output": 1767
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 96,
+   "N": 96,
+   "B": 4,
+   "reads": 1203,
+   "writes": 1009,
+   "measured": 2212,
+   "formula": 1728,
+   "output": 1767
+  },
+  {
+   "join": "hash_join",
+   "M": 96,
+   "N": 96,
+   "B": 4,
+   "reads": 1066,
+   "writes": 613,
+   "measured": 1679,
+   "formula": 576,
+   "output": 1767
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 96,
+   "N": 96,
+   "B": 16,
+   "reads": 776,
+   "writes": 0,
+   "measured": 776,
+   "formula": 768,
+   "output": 1767
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 96,
+   "N": 96,
+   "B": 16,
+   "reads": 482,
+   "writes": 288,
+   "measured": 770,
+   "formula": 960,
+   "output": 1767
+  },
+  {
+   "join": "hash_join",
+   "M": 96,
+   "N": 96,
+   "B": 16,
+   "reads": 398,
+   "writes": 204,
+   "measured": 602,
+   "formula": 576,
+   "output": 1767
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 96,
+   "N": 96,
+   "B": 64,
+   "reads": 291,
+   "writes": 0,
+   "measured": 291,
+   "formula": 288,
+   "output": 1767
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 96,
+   "N": 96,
+   "B": 64,
+   "reads": 386,
+   "writes": 192,
+   "measured": 578,
+   "formula": 960,
+   "output": 1767
+  },
+  {
+   "join": "hash_join",
+   "M": 96,
+   "N": 96,
+   "B": 64,
+   "reads": 444,
+   "writes": 250,
+   "measured": 694,
+   "formula": 576,
+   "output": 1767
+  },
+  {
+   "join": "nested_loop_join",
+   "M": 96,
+   "N": 96,
+   "B": 256,
+   "reads": 194,
+   "writes": 0,
+   "measured": 194,
+   "formula": 192,
+   "output": 1767
+  },
+  {
+   "join": "sort_merge_join",
+   "M": 96,
+   "N": 96,
+   "B": 256,
+   "reads": 194,
+   "writes": 0,
+   "measured": 194,
+   "formula": 576,
+   "output": 1767
+  },
+  {
+   "join": "hash_join",
+   "M": 96,
+   "N": 96,
+   "B": 256,
+   "reads": 698,
+   "writes": 504,
+   "measured": 1202,
+   "formula": 576,
+   "output": 1767
+  }
+ ],
+ "sort_passes": [
+  {
+   "N": 8,
+   "B": 3,
+   "formula": 3,
+   "measured": 3,
+   "peak": 3
+  },
+  {
+   "N": 30,
+   "B": 4,
+   "formula": 3,
+   "measured": 4,
+   "peak": 4
+  },
+  {
+   "N": 80,
+   "B": 4,
+   "formula": 4,
+   "measured": 4,
+   "peak": 4
+  },
+  {
+   "N": 100,
+   "B": 8,
+   "formula": 3,
+   "measured": 3,
+   "peak": 8
+  },
+  {
+   "N": 500,
+   "B": 16,
+   "formula": 3,
+   "measured": 3,
+   "peak": 16
+  },
+  {
+   "N": 64,
+   "B": 64,
+   "formula": 1,
+   "measured": 2,
+   "peak": 64
+  }
+ ],
+ "crossover": {
+  "by_frames": [
+   {
+    "pages": 32,
+    "B": 4,
+    "costs": {
+     "nested_loop_join": 561,
+     "sort_merge_join": 568,
+     "hash_join": 540
+    },
+    "cheapest": "hash_join"
+   },
+   {
+    "pages": 32,
+    "B": 6,
+    "costs": {
+     "nested_loop_join": 297,
+     "sort_merge_join": 376,
+     "hash_join": 410
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 32,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 231,
+     "sort_merge_join": 322,
+     "hash_join": 210
+    },
+    "cheapest": "hash_join"
+   },
+   {
+    "pages": 32,
+    "B": 12,
+    "costs": {
+     "nested_loop_join": 165,
+     "sort_merge_join": 194,
+     "hash_join": 210
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 32,
+    "B": 16,
+    "costs": {
+     "nested_loop_join": 132,
+     "sort_merge_join": 194,
+     "hash_join": 224
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 32,
+    "B": 32,
+    "costs": {
+     "nested_loop_join": 99,
+     "sort_merge_join": 194,
+     "hash_join": 258
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 32,
+    "B": 64,
+    "costs": {
+     "nested_loop_join": 66,
+     "sort_merge_join": 130,
+     "hash_join": 318
+    },
+    "cheapest": "nested_loop_join"
+   }
+  ],
+  "by_size": [
+   {
+    "pages": 4,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 10,
+     "sort_merge_join": 18,
+     "hash_join": 42
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 8,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 27,
+     "sort_merge_join": 50,
+     "hash_join": 66
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 16,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 68,
+     "sort_merge_join": 98,
+     "hash_join": 108
+    },
+    "cheapest": "nested_loop_join"
+   },
+   {
+    "pages": 32,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 231,
+     "sort_merge_join": 322,
+     "hash_join": 206
+    },
+    "cheapest": "hash_join"
+   },
+   {
+    "pages": 64,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 780,
+     "sort_merge_join": 642,
+     "hash_join": 810
+    },
+    "cheapest": "sort_merge_join"
+   },
+   {
+    "pages": 96,
+    "B": 8,
+    "costs": {
+     "nested_loop_join": 1649,
+     "sort_merge_join": 962,
+     "hash_join": 1108
+    },
+    "cheapest": "sort_merge_join"
+   }
+  ]
+ },
+ "skew": {
+  "uniform": {
+   "B": 16,
+   "partition_pages": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "overflow": [],
+   "reads": 340,
+   "writes": 180,
+   "rows": 1500
+  },
+  "skewed": {
+   "B": 16,
+   "partition_pages": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    35,
+    4,
+    4,
+    4
+   ],
+   "overflow": [
+    [
+     "repartition",
+     1,
+     35
+    ],
+    [
+     "repartition",
+     2,
+     32
+    ],
+    [
+     "nested_loop",
+     3,
+     32
+    ]
+   ],
+   "reads": 594,
+   "writes": 322,
+   "rows": 360900
+  }
+ },
+ "budget": {
+  "pages": 80,
+  "B": 4,
+  "rows": 1520,
+  "peak_frames": 4,
+  "passes": 4,
+  "reads": 321,
+  "writes": 240,
+  "same_counters_twice": true
+ }
+}
