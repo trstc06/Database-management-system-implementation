@@ -1,0 +1,158 @@
+{
+  "capacity": [
+    {
+      "schema": "all INT",
+      "record_bytes": 12,
+      "computed": 255,
+      "measured": 255,
+      "pages": 3
+    },
+    {
+      "schema": "short VARCHAR",
+      "record_bytes": 20,
+      "computed": 170,
+      "measured": 170,
+      "pages": 3
+    },
+    {
+      "schema": "VARCHAR(200)",
+      "record_bytes": 206,
+      "computed": 19,
+      "measured": 19,
+      "pages": 3
+    }
+  ],
+  "policies": [
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "lru",
+      "frames": 4,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 796,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "lru",
+      "frames": 16,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 784,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "lru",
+      "frames": 64,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 736,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "lru",
+      "frames": 256,
+      "fetches": 800,
+      "hits": 720,
+      "misses": 80,
+      "evictions": 0,
+      "reads": 80,
+      "writes": 0,
+      "hit_rate": 0.9
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "clock",
+      "frames": 4,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 796,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "clock",
+      "frames": 16,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 784,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "clock",
+      "frames": 64,
+      "fetches": 800,
+      "hits": 0,
+      "misses": 800,
+      "evictions": 736,
+      "reads": 800,
+      "writes": 0,
+      "hit_rate": 0.0
+    },
+    {
+      "trace": "trace3 (rebuilt from the handout)",
+      "policy": "clock",
+      "frames": 256,
+      "fetches": 800,
+      "hits": 720,
+      "misses": 80,
+      "evictions": 0,
+      "reads": 80,
+      "writes": 0,
+      "hit_rate": 0.9
+    }
+  ],
+  "scan_cost": [
+    {
+      "frames": 2,
+      "data_pages": 500,
+      "rows": 9500,
+      "hits": 0,
+      "misses": 501,
+      "evictions": 499,
+      "reads": 501,
+      "writes": 0,
+      "peak_pinned": 1
+    },
+    {
+      "frames": 8,
+      "data_pages": 500,
+      "rows": 9500,
+      "hits": 0,
+      "misses": 501,
+      "evictions": 493,
+      "reads": 501,
+      "writes": 0,
+      "peak_pinned": 1
+    },
+    {
+      "frames": 64,
+      "data_pages": 500,
+      "rows": 9500,
+      "hits": 0,
+      "misses": 501,
+      "evictions": 437,
+      "reads": 501,
+      "writes": 0,
+      "peak_pinned": 1
+    }
+  ]
+}

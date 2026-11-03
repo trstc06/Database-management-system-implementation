@@ -1,0 +1,4 @@
+#!/bin/sh
+# Module 1 storage engine.
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m dbms.storage.cli "$@"

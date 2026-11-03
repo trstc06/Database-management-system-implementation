@@ -1,14 +1,19 @@
 # Design log
 
-## Week one: engine refactor
+## 2026-10-27: Bonus 1 engine as a library
 
-### 2026-10-27: Bonus 1 engine as a library
+I moved my Bonus 1 code into `dbms/ra/` and split it into separate files that don't print or open files. I added a standalone condition parser, JSON save and load for trees, and bag semantics with a separate `distinct`. Only case 23 changed meaning. See `docs/REFACTOR.md`.
 
-I copied the Bonus 1 code into `dbms/ra/` and split it so the tokenizer, parser, tree and operators import separately and none of them print or open files. The tokenizer's own command line moved into `ra/cli.py`. I added `parse_condition`, JSON round-tripping in the Module 3 logical plan shape, and operators that pull from any source with `scan()`. Projection now keeps duplicates, and `distinct` is a separate operator. Details and the full list of changed tests are in `docs/REFACTOR.md`.
+AI mistakes:
 
-Only numbered case 23 changed meaning, because projection no longer removes duplicates. Three other tests changed for the same reason, and the decimal tests changed because INT is the only numeric type now.
+- The AI's JSON reader would have reported a bad column as `field 'c' is invalid`, a field that doesn't exist. I saw it while reading the code and fixed the message.
+- The AI switched file reading to `Path.open`, which would have broken one of my tests that fakes `open`. I caught it while moving the tests and switched back.
 
-AI mistakes found in this step:
+## 2026-11-02: Module 1
 
-- The AI-written plan deserialiser reused its field reader for each projected column by wrapping the column text in a fake object with the key `c`. A bad column would have produced the message `field 'c' is invalid`, which names a field that does not exist in the plan. I found this while reading the code before running it, and changed the message to name the column, for example `column 'a.' is invalid`. A test now checks the wording.
-- When the AI moved the file reading into `ra/cli.py`, it switched to `Path.open`. The ported command-line test replaces `builtins.open` with a mock, which `Path.open` does not use, so the test would have read the real disk and failed with a missing file. I caught this while porting the tests and changed back to the built-in `open`.
+I built the page, buffer pool, heap file, catalog, loader and `storage` commands, writing the handout's worked examples as tests first. Sections 3.2 and 5.3 match exactly.
+
+AI mistakes:
+
+- The AI's catalog saved new counts by deleting and reinserting the table's record, which changed the table order after every load. A test caught it (`['S', 'R']` instead of `['R', 'S']`). I now overwrite the record in place.
+- The AI's `scan --limit` called `close()` on an `islice`, which crashed. I found it running the commands by hand and fixed it to close the scan itself.
