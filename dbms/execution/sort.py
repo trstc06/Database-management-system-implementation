@@ -131,7 +131,10 @@ class Sort(Operator):
             return
         yield from self.merged(self.runs)
 
-    def streaming_frames(self) -> int:
+    def min_keep(self) -> int:
+        return 1
+
+    def stream_frames(self) -> int:
         return len(self.memory.frames) if self.memory is not None else len(self.runs)
 
     def stop(self) -> None:

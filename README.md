@@ -22,6 +22,11 @@ python3 -m experiments.m2_measure --out experiments/results/m2.json --plot docs/
 ./bin/sql parse --query "SELECT name FROM Emp UNION ALL SELECT title FROM Dept" --explain
 ./bin/sql compile --db db --file q.sql --json
 ./bin/sql check --db db --file q.sql
+./bin/opt analyze --db db --table R
+./bin/opt explain --db db --sql "SELECT ..." --frames 32 --rewrites
+./bin/opt plan --db db --logical q.json --frames 32 --json
+./bin/opt dp-table --db db --logical q.json --frames 32
+python3 -m experiments.m4_measure --out experiments/results/m4.json
 ```
 
 Each tool in `bin/` is a short script that runs the matching Python module. Run them with their path, like `./bin/storage`. This matters most for `exec`, because typing just `exec` runs the shell's own `exec` command instead of mine.
@@ -35,9 +40,10 @@ Each tool in `bin/` is a short script that runs the matching Python module. Run 
 | `dbms/storage/` | Module 1: pages, the buffer pool, heap files, the catalog and the CSV loader |
 | `dbms/execution/` | Module 2: operators, external sort, the three joins and the plan runner |
 | `dbms/sql/` | Module 3: SQL lexer, parser, name resolution and the translator to logical plans |
+| `dbms/optimizer/` | Module 4: ANALYZE and statistics, estimates, rewrite rules, the cost model and join ordering |
 | `experiments/` | Scripts that produce every number in my reports |
 | `tests/` | Tests, one folder per module |
 | `docs/` | Design documents and reports |
 | `DESIGN_LOG.md` | What I tried, what broke, and where AI help was wrong |
 
-`docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1, `docs/DESIGN_M2.md` and `docs/REPORT_M2.md` cover Module 2, and `docs/GRAMMAR_SQL.md` and `docs/DESIGN_M3.md` cover Module 3.
+`docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1, `docs/DESIGN_M2.md` and `docs/REPORT_M2.md` cover Module 2, `docs/GRAMMAR_SQL.md` and `docs/DESIGN_M3.md` cover Module 3, and `docs/DESIGN_M4.md` and `docs/REPORT_M4.md` cover Module 4.

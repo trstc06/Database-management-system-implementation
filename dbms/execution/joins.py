@@ -49,6 +49,9 @@ def equality_keys(condition: str, left, right) -> tuple[list[int], list[int]]:
 
 
 class Join(Operator):
+    def min_keep(self) -> int:
+        return 3   # every join streams with at least one frame per input plus one of its own
+
     def __init__(self, ctx, condition: str, left: Operator, right: Operator) -> None:
         super().__init__(ctx, [left, right])
         self.condition = condition
@@ -65,7 +68,8 @@ class NestedLoopJoin(Join):
 
     def __init__(self, ctx, condition: str, left: Operator, right: Operator) -> None:
         super().__init__(ctx, condition, left, right)
-        self.test = bind_condition(parse_condition(condition), self.columns)
+        # No condition means every pair matches: a cross product.
+        self.test = bind_condition(parse_condition(condition), self.columns) if condition else (lambda row: True)
         self.inner_file = None
         self.block = None
 
@@ -111,7 +115,7 @@ class NestedLoopJoin(Join):
                     if self.test(row):
                         yield row
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
         return len(self.block.frames) + 1 + self.children[0].streaming_frames()
 
     def stop(self) -> None:
@@ -199,7 +203,7 @@ class SortMergeJoin(Join):
                     self.spill = None
                     self.run = Workspace(self.ctx, self, 1, self.children[1].columns)
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
         return sum(sort.streaming_frames() for sort in self.sorts) + 1
 
     def stop(self) -> None:
@@ -313,7 +317,7 @@ class HashJoin(Join):
         finally:
             block.close()
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
         return self.keep
 
     def stop(self) -> None:

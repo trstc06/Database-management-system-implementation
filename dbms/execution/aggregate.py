@@ -17,6 +17,7 @@ from .sort import Sort
 
 AGGREGATES = ('count', 'sum', 'avg', 'min', 'max')
 STATE_SIZE = 16   # bytes I count per aggregate in a hash table entry
+MIN_PARTITION_FRAMES = 3   # a dump reader and at least 2 partition writers
 
 
 class Grouping(Operator):
@@ -45,6 +46,9 @@ class Grouping(Operator):
 
     def start(self) -> None:
         child = self.children[0]
+        if self.mode == 'hash' and self.hold - 1 < MIN_PARTITION_FRAMES:
+            # Too few frames to partition if the table overflows; sorting needs only one.
+            self.mode = 'sort'
         if self.mode == 'sort':
             keys = [[c.qualified_name, 'asc'] for c in self.key_columns]
             if keys:
@@ -55,7 +59,7 @@ class Grouping(Operator):
                 child.set_limits(self.hold, self.keep)
                 child.open()
             return
-        child.set_limits(self.hold, self.hold - 2)
+        child.set_limits(self.hold, max(1, self.hold - MIN_PARTITION_FRAMES))
         child.open()
         frames = self.hold - child.streaming_frames()
         self.buffer = Workspace(self.ctx, self, frames, child.columns)
@@ -71,8 +75,8 @@ class Grouping(Operator):
                 self.spill_input(iter(()), frames)
 
     def spill_input(self, rows, frames: int) -> None:
-        if frames < 3:
-            raise ExecutionError('memory', f'{self.name} needs 3 frames to partition, has {frames}')
+        if frames < MIN_PARTITION_FRAMES:
+            raise ExecutionError('memory', f'{self.name} needs {MIN_PARTITION_FRAMES} frames to partition, has {frames}')
         columns = self.children[0].columns
         dump = self.ctx.temp_file(self).borrow(self.buffer.frames[0])
         self.files.append(dump)
@@ -174,7 +178,10 @@ class Grouping(Operator):
     def on_empty(self):
         return iter(())
 
-    def streaming_frames(self) -> int:
+    def min_keep(self) -> int:
+        return 2 if self.mode == 'hash' else 1
+
+    def stream_frames(self) -> int:
         if self.sort is not None:
             return self.sort.streaming_frames()
         if self.mode == 'sort':

@@ -26,8 +26,11 @@ class Union(Operator):
     def produce(self):
         yield from self.pull(self.inner)
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
         return self.inner.streaming_frames()
+
+    def min_keep(self) -> int:
+        return 2
 
     def stop(self) -> None:
         self.inner.close()
@@ -75,8 +78,11 @@ class SortedSetOp(Operator):
             previous = r
             r = next(lefts, END)
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
         return sum(sort.streaming_frames() for sort in self.sorts)
+
+    def min_keep(self) -> int:
+        return 2
 
     def stop(self) -> None:
         for sort in self.sorts:

@@ -1,0 +1,1816 @@
+{
+ "sizes": {
+  "Dept": 50,
+  "Emp": 4000,
+  "Proj": 300,
+  "Site": 600
+ },
+ "frames": 16,
+ "estimation": {
+  "median_q_error": 1.0,
+  "worst": {
+   "query": 10,
+   "node": "union",
+   "est_rows": 4050,
+   "actual_rows": 8.0,
+   "q_error": 506.25
+  },
+  "nodes": [
+   {
+    "query": 1,
+    "node": "project",
+    "est_rows": 784,
+    "actual_rows": 784.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 1,
+    "node": "filter",
+    "est_rows": 784,
+    "actual_rows": 784.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 1,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 2,
+    "node": "project",
+    "est_rows": 75,
+    "actual_rows": 77.0,
+    "q_error": 1.03
+   },
+   {
+    "query": 2,
+    "node": "filter",
+    "est_rows": 75,
+    "actual_rows": 77.0,
+    "q_error": 1.03
+   },
+   {
+    "query": 2,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 3,
+    "node": "project",
+    "est_rows": 15,
+    "actual_rows": 15.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 3,
+    "node": "filter",
+    "est_rows": 15,
+    "actual_rows": 15.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 3,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 4,
+    "node": "project",
+    "est_rows": 659,
+    "actual_rows": 663.0,
+    "q_error": 1.01
+   },
+   {
+    "query": 4,
+    "node": "project",
+    "est_rows": 659,
+    "actual_rows": 663.0,
+    "q_error": 1.01
+   },
+   {
+    "query": 4,
+    "node": "sort_merge_join",
+    "est_rows": 659,
+    "actual_rows": 663.0,
+    "q_error": 1.01
+   },
+   {
+    "query": 4,
+    "node": "project",
+    "est_rows": 42,
+    "actual_rows": 41.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 4,
+    "node": "filter",
+    "est_rows": 42,
+    "actual_rows": 41.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 4,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 4,
+    "node": "project",
+    "est_rows": 784,
+    "actual_rows": 784.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 4,
+    "node": "filter",
+    "est_rows": 784,
+    "actual_rows": 784.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 4,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 5,
+    "node": "project",
+    "est_rows": 480,
+    "actual_rows": 472.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 5,
+    "node": "project",
+    "est_rows": 480,
+    "actual_rows": 472.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 5,
+    "node": "nested_loop_join",
+    "est_rows": 480,
+    "actual_rows": 472.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 5,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 5,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 5,
+    "node": "project",
+    "est_rows": 6,
+    "actual_rows": 6.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 5,
+    "node": "filter",
+    "est_rows": 6,
+    "actual_rows": 6.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 5,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 6,
+    "node": "filter",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 6,
+    "node": "group_by (sort)",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 6,
+    "node": "filter",
+    "est_rows": 3583,
+    "actual_rows": 3516.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 6,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 1600,
+    "actual_rows": 1627.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 1600,
+    "actual_rows": 1627.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 1600,
+    "actual_rows": 1627.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 7,
+    "node": "nested_loop_join",
+    "est_rows": 1600,
+    "actual_rows": 1627.0,
+    "q_error": 1.02
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "nested_loop_join",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "project",
+    "est_rows": 20,
+    "actual_rows": 20.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "filter",
+    "est_rows": 20,
+    "actual_rows": 20.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 7,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "sort_merge_join",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "sort_merge_join",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "nested_loop_join",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "filter",
+    "est_rows": 67,
+    "actual_rows": 67.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "seqscan Site as s",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 8,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 9,
+    "node": "distinct (hash)",
+    "est_rows": 8,
+    "actual_rows": 8.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 9,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 9,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 10,
+    "node": "union",
+    "est_rows": 4050,
+    "actual_rows": 8.0,
+    "q_error": 506.25
+   },
+   {
+    "query": 10,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 10,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 10,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 10,
+    "node": "seqscan Dept",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 120,
+    "actual_rows": 135.0,
+    "q_error": 1.12
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 120,
+    "actual_rows": 135.0,
+    "q_error": 1.12
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 120,
+    "actual_rows": 135.0,
+    "q_error": 1.12
+   },
+   {
+    "query": 11,
+    "node": "sort_merge_join",
+    "est_rows": 120,
+    "actual_rows": 135.0,
+    "q_error": 1.12
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 60,
+    "actual_rows": 64.0,
+    "q_error": 1.07
+   },
+   {
+    "query": 11,
+    "node": "sort_merge_join",
+    "est_rows": 60,
+    "actual_rows": 64.0,
+    "q_error": 1.07
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 10,
+    "actual_rows": 10.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "filter",
+    "est_rows": 10,
+    "actual_rows": 10.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "project",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 11,
+    "node": "seqscan Site as s",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 12,
+    "node": "project",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 12,
+    "node": "project",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 12,
+    "node": "sort_merge_join",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 12,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 12,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 12,
+    "node": "rename t",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 12,
+    "node": "filter",
+    "est_rows": 17,
+    "actual_rows": 0.0,
+    "q_error": 17.0
+   },
+   {
+    "query": 12,
+    "node": "group_by (sort)",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 12,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 13,
+    "node": "limit",
+    "est_rows": 10,
+    "actual_rows": 10.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 13,
+    "node": "sort",
+    "est_rows": 417,
+    "actual_rows": 10.0,
+    "q_error": 41.7
+   },
+   {
+    "query": 13,
+    "node": "project",
+    "est_rows": 417,
+    "actual_rows": 417.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 13,
+    "node": "filter",
+    "est_rows": 417,
+    "actual_rows": 417.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 13,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 14,
+    "node": "project",
+    "est_rows": 203,
+    "actual_rows": 784.0,
+    "q_error": 3.86
+   },
+   {
+    "query": 14,
+    "node": "filter",
+    "est_rows": 203,
+    "actual_rows": 784.0,
+    "q_error": 3.86
+   },
+   {
+    "query": 14,
+    "node": "seqscan Emp",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 15,
+    "node": "project",
+    "est_rows": 62,
+    "actual_rows": 31.0,
+    "q_error": 2.0
+   },
+   {
+    "query": 15,
+    "node": "project",
+    "est_rows": 62,
+    "actual_rows": 31.0,
+    "q_error": 2.0
+   },
+   {
+    "query": 15,
+    "node": "sort_merge_join",
+    "est_rows": 62,
+    "actual_rows": 31.0,
+    "q_error": 2.0
+   },
+   {
+    "query": 15,
+    "node": "project",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 15,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 15,
+    "node": "project",
+    "est_rows": 59,
+    "actual_rows": 383.0,
+    "q_error": 6.49
+   },
+   {
+    "query": 15,
+    "node": "filter",
+    "est_rows": 59,
+    "actual_rows": 383.0,
+    "q_error": 6.49
+   },
+   {
+    "query": 15,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "group_by (sort)",
+    "est_rows": 8,
+    "actual_rows": 8.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "sort_merge_join",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "seqscan Dept as d",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 16,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 17,
+    "node": "project",
+    "est_rows": 171,
+    "actual_rows": 6.0,
+    "q_error": 28.5
+   },
+   {
+    "query": 17,
+    "node": "project",
+    "est_rows": 171,
+    "actual_rows": 6.0,
+    "q_error": 28.5
+   },
+   {
+    "query": 17,
+    "node": "sort_merge_join",
+    "est_rows": 171,
+    "actual_rows": 6.0,
+    "q_error": 28.5
+   },
+   {
+    "query": 17,
+    "node": "project",
+    "est_rows": 258,
+    "actual_rows": 177.0,
+    "q_error": 1.46
+   },
+   {
+    "query": 17,
+    "node": "filter",
+    "est_rows": 258,
+    "actual_rows": 177.0,
+    "q_error": 1.46
+   },
+   {
+    "query": 17,
+    "node": "seqscan Emp as m",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 17,
+    "node": "project",
+    "est_rows": 171,
+    "actual_rows": 171.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 17,
+    "node": "filter",
+    "est_rows": 171,
+    "actual_rows": 171.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 17,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 18,
+    "node": "intersect",
+    "est_rows": 50,
+    "actual_rows": 8.0,
+    "q_error": 6.25
+   },
+   {
+    "query": 18,
+    "node": "project",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 18,
+    "node": "seqscan Site",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 18,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 18,
+    "node": "seqscan Dept",
+    "est_rows": 50,
+    "actual_rows": 50.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 19,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 36.0,
+    "q_error": 1.39
+   },
+   {
+    "query": 19,
+    "node": "project",
+    "est_rows": 50,
+    "actual_rows": 36.0,
+    "q_error": 1.39
+   },
+   {
+    "query": 19,
+    "node": "sort_merge_join",
+    "est_rows": 50,
+    "actual_rows": 36.0,
+    "q_error": 1.39
+   },
+   {
+    "query": 19,
+    "node": "project",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 19,
+    "node": "seqscan Site as s",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 19,
+    "node": "project",
+    "est_rows": 21,
+    "actual_rows": 21.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 19,
+    "node": "filter",
+    "est_rows": 21,
+    "actual_rows": 21.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 19,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "sort_merge_join",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "sort_merge_join",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "filter",
+    "est_rows": 86,
+    "actual_rows": 86.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "seqscan Site as s",
+    "est_rows": 600,
+    "actual_rows": 600.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "seqscan Proj as p",
+    "est_rows": 300,
+    "actual_rows": 300.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "project",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   },
+   {
+    "query": 20,
+    "node": "seqscan Emp as e",
+    "est_rows": 4000,
+    "actual_rows": 4000.0,
+    "q_error": 1.0
+   }
+  ],
+  "cost": [
+   {
+    "query": 1,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 2,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 3,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 4,
+    "est_cost": 84,
+    "actual_io": 86
+   },
+   {
+    "query": 5,
+    "est_cost": 86,
+    "actual_io": 89
+   },
+   {
+    "query": 6,
+    "est_cost": 223,
+    "actual_io": 234
+   },
+   {
+    "query": 7,
+    "est_cost": 103,
+    "actual_io": 110
+   },
+   {
+    "query": 8,
+    "est_cost": 95,
+    "actual_io": 106
+   },
+   {
+    "query": 9,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 10,
+    "est_cost": 84,
+    "actual_io": 86
+   },
+   {
+    "query": 11,
+    "est_cost": 8,
+    "actual_io": 10
+   },
+   {
+    "query": 12,
+    "est_cost": 250,
+    "actual_io": 262
+   },
+   {
+    "query": 13,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 14,
+    "est_cost": 83,
+    "actual_io": 84
+   },
+   {
+    "query": 15,
+    "est_cost": 85,
+    "actual_io": 87
+   },
+   {
+    "query": 16,
+    "est_cost": 118,
+    "actual_io": 146
+   },
+   {
+    "query": 17,
+    "est_cost": 166,
+    "actual_io": 168
+   },
+   {
+    "query": 18,
+    "est_cost": 5,
+    "actual_io": 7
+   },
+   {
+    "query": 19,
+    "est_cost": 6,
+    "actual_io": 8
+   },
+   {
+    "query": 20,
+    "est_cost": 90,
+    "actual_io": 92
+   }
+  ]
+ },
+ "optimization": [
+  {
+   "query": 1,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 2,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 3,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 4,
+   "optimized_io": 86,
+   "naive_io": 96,
+   "ratio": 1.12
+  },
+  {
+   "query": 5,
+   "optimized_io": 89,
+   "naive_io": 96,
+   "ratio": 1.08
+  },
+  {
+   "query": 6,
+   "optimized_io": 234,
+   "naive_io": 234,
+   "ratio": 1.0
+  },
+  {
+   "query": 7,
+   "optimized_io": 110,
+   "naive_io": 420,
+   "ratio": 3.82
+  },
+  {
+   "query": 8,
+   "optimized_io": 106,
+   "naive_io": 859,
+   "ratio": 8.1
+  },
+  {
+   "query": 9,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 10,
+   "optimized_io": 86,
+   "naive_io": 86,
+   "ratio": 1.0
+  },
+  {
+   "query": 11,
+   "optimized_io": 10,
+   "naive_io": 840,
+   "ratio": 84.0
+  },
+  {
+   "query": 12,
+   "optimized_io": 262,
+   "naive_io": 262,
+   "ratio": 1.0
+  },
+  {
+   "query": 13,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 14,
+   "optimized_io": 84,
+   "naive_io": 84,
+   "ratio": 1.0
+  },
+  {
+   "query": 15,
+   "optimized_io": 87,
+   "naive_io": 102,
+   "ratio": 1.17
+  },
+  {
+   "query": 16,
+   "optimized_io": 146,
+   "naive_io": 538,
+   "ratio": 3.68
+  },
+  {
+   "query": 17,
+   "optimized_io": 168,
+   "naive_io": 583,
+   "ratio": 3.47
+  },
+  {
+   "query": 18,
+   "optimized_io": 7,
+   "naive_io": 7,
+   "ratio": 1.0
+  },
+  {
+   "query": 19,
+   "optimized_io": 8,
+   "naive_io": 8,
+   "ratio": 1.0
+  },
+  {
+   "query": 20,
+   "optimized_io": 92,
+   "naive_io": 145,
+   "ratio": 1.58
+  }
+ ],
+ "rules": [
+  {
+   "rule": 1,
+   "with_rule": 1995,
+   "without_rule": 2061
+  },
+  {
+   "rule": 2,
+   "with_rule": 1995,
+   "without_rule": 2100
+  },
+  {
+   "rule": 3,
+   "with_rule": 1995,
+   "without_rule": 2001
+  },
+  {
+   "rule": 4,
+   "with_rule": 1995,
+   "without_rule": 1995
+  },
+  {
+   "rule": 5,
+   "with_rule": 1995,
+   "without_rule": 1995
+  },
+  {
+   "rule": 6,
+   "with_rule": 1995,
+   "without_rule": 2422
+  },
+  {
+   "rule": 7,
+   "with_rule": 1995,
+   "without_rule": 1995
+  }
+ ],
+ "algorithms_by_frames": [
+  {
+   "query": 4,
+   "4": [
+    "nested_loop_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 5,
+   "4": [
+    "nested_loop_join"
+   ],
+   "16": [
+    "nested_loop_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 7,
+   "4": [
+    "nested_loop_join",
+    "sort_merge_join"
+   ],
+   "16": [
+    "nested_loop_join",
+    "nested_loop_join"
+   ],
+   "64": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 8,
+   "4": [
+    "sort_merge_join",
+    "nested_loop_join",
+    "nested_loop_join"
+   ],
+   "16": [
+    "sort_merge_join",
+    "sort_merge_join",
+    "nested_loop_join"
+   ],
+   "64": [
+    "sort_merge_join",
+    "sort_merge_join",
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 11,
+   "4": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ],
+   "16": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 12,
+   "4": [
+    "sort_merge_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 15,
+   "4": [
+    "sort_merge_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 16,
+   "4": [
+    "nested_loop_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 17,
+   "4": [
+    "sort_merge_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 19,
+   "4": [
+    "sort_merge_join"
+   ],
+   "16": [
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join"
+   ]
+  },
+  {
+   "query": 20,
+   "4": [
+    "sort_merge_join",
+    "nested_loop_join"
+   ],
+   "16": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ],
+   "64": [
+    "sort_merge_join",
+    "sort_merge_join"
+   ]
+  }
+ ],
+ "correlated": [
+  {
+   "query": "q15",
+   "B": 4,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 99,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "q15",
+   "B": 5,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 103,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "q15",
+   "B": 6,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 107,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "q15",
+   "B": 8,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 115,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "q15",
+   "B": 12,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 131,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "q15",
+   "B": 16,
+   "chosen": [
+    "sort_merge_join"
+   ],
+   "chosen_io": 87,
+   "est_cost": 85,
+   "actual_by_algorithm": {
+    "nested_loop_join": 91,
+    "hash_join": 147,
+    "sort_merge_join": 87
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 4,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 228,
+   "est_cost": 174,
+   "actual_by_algorithm": {
+    "nested_loop_join": 228,
+    "hash_join": 216,
+    "sort_merge_join": 294
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 5,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 210,
+   "est_cost": 172,
+   "actual_by_algorithm": {
+    "nested_loop_join": 210,
+    "hash_join": 404,
+    "sort_merge_join": 258
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 6,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 204,
+   "est_cost": 171,
+   "actual_by_algorithm": {
+    "nested_loop_join": 204,
+    "hash_join": 228,
+    "sort_merge_join": 250
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 8,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 192,
+   "est_cost": 170,
+   "actual_by_algorithm": {
+    "nested_loop_join": 192,
+    "hash_join": 224,
+    "sort_merge_join": 216
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 12,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 186,
+   "est_cost": 169,
+   "actual_by_algorithm": {
+    "nested_loop_join": 186,
+    "hash_join": 234,
+    "sort_merge_join": 202
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "wide",
+   "B": 16,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 186,
+   "est_cost": 168,
+   "actual_by_algorithm": {
+    "nested_loop_join": 186,
+    "hash_join": 258,
+    "sort_merge_join": 202
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 4,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 417,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 417,
+    "hash_join": 354,
+    "sort_merge_join": 1070
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 5,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 334,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 334,
+    "hash_join": 356,
+    "sort_merge_join": 734
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 6,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 251,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 251,
+    "hash_join": 358,
+    "sort_merge_join": 712
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 8,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 251,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 251,
+    "hash_join": 366,
+    "sort_merge_join": 536
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 12,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 168,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 168,
+    "hash_join": 366,
+    "sort_merge_join": 530
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  },
+  {
+   "query": "star",
+   "B": 16,
+   "chosen": [
+    "nested_loop_join"
+   ],
+   "chosen_io": 168,
+   "est_cost": 166,
+   "actual_by_algorithm": {
+    "nested_loop_join": 168,
+    "hash_join": 378,
+    "sort_merge_join": 344
+   },
+   "filter_est_rows": [
+    59
+   ],
+   "filter_actual_rows": [
+    383
+   ]
+  }
+ ],
+ "dp_table": "Subset        Best plan considered                                         Cost\n{s}           access s                                                     4\n{p}           access p                                                     2\n{d}           access d                                                     1\n{e}           access e                                                     83\n{s, p}        {p} outer, sort_merge_join with s inner                      6\n              alternative: {s} outer, sort_merge_join with p inner         6\n              alternative: {p} outer, nested_loop_join with s inner        8\n              alternative: {s} outer, nested_loop_join with p inner        8\n              alternative: {p} outer, hash_join with s inner               10\n              alternative: {s} outer, hash_join with p inner               10\n{s, d}        no predicate, skipped                                        -\n{p, d}        {d} outer, sort_merge_join with p inner                      3\n              alternative: {p} outer, sort_merge_join with d inner         3\n              alternative: {d} outer, nested_loop_join with p inner        5\n              alternative: {p} outer, nested_loop_join with d inner        5\n              alternative: {d} outer, hash_join with p inner               7\n              alternative: {p} outer, hash_join with d inner               7\n{s, e}        no predicate, skipped                                        -\n{p, e}        {e} outer, nested_loop_join with p inner                     87\n              alternative: {e} outer, sort_merge_join with p inner         111\n              alternative: {p} outer, nested_loop_join with e inner        111\n              alternative: {p} outer, sort_merge_join with e inner         111\n              alternative: {e} outer, hash_join with p inner               113\n              alternative: {p} outer, hash_join with e inner               113\n{d, e}        no predicate, skipped                                        -\n{s, p, d}     {p, d} outer, sort_merge_join with s inner                   8\n              alternative: {s, p} outer, sort_merge_join with d inner      8\n              alternative: {p, d} outer, nested_loop_join with s inner     10\n              alternative: {s, p} outer, nested_loop_join with d inner     10\n              alternative: {p, d} outer, hash_join with s inner            12\n              alternative: {s, p} outer, hash_join with d inner            12\n{s, p, e}     {p, e} outer, sort_merge_join with s inner                   93\n              alternative: {p, e} outer, nested_loop_join with s inner     95\n              alternative: {p, e} outer, hash_join with s inner            99\n              alternative: {s, p} outer, nested_loop_join with e inner     116\n              alternative: {s, p} outer, sort_merge_join with e inner      116\n              alternative: {s, p} outer, hash_join with e inner            118\n{s, d, e}     no predicate, skipped                                        -\n{p, d, e}     {p, e} outer, sort_merge_join with d inner                   90\n              alternative: {p, e} outer, nested_loop_join with d inner     92\n              alternative: {p, e} outer, hash_join with d inner            96\n              alternative: {p, d} outer, nested_loop_join with e inner     113\n              alternative: {p, d} outer, sort_merge_join with e inner      113\n              alternative: {p, d} outer, hash_join with e inner            115\n{s, p, d, e}  {s, p, e} outer, sort_merge_join with d inner                95\n              alternative: {p, d, e} outer, sort_merge_join with s inner   96\n              alternative: {s, p, e} outer, nested_loop_join with d inner  97\n              alternative: {p, d, e} outer, nested_loop_join with s inner  98\n              alternative: {s, p, e} outer, hash_join with d inner         99\n              alternative: {p, d, e} outer, hash_join with s inner         102\n              alternative: {s, p, d} outer, nested_loop_join with e inner  118\n              alternative: {s, p, d} outer, sort_merge_join with e inner   118\n              alternative: {s, p, d} outer, hash_join with e inner         120"
+}

@@ -15,6 +15,8 @@ Each operator gets two numbers from its parent: how many frames it may hold duri
 
 At B = 4 a join of two tables runs, because the two inputs are read one after the other.
 
+Added in Module 4, when the optimizer started stacking blocking operators (like a group by over a join): if an operator is allowed to keep fewer frames than it needs to stream, it does all its work inside `open` with every frame it may hold, minus one, then writes its output to a temp file and streams that back with 1 frame. That costs one extra write and read of its output, but it keeps every plan under B. Also, a hash group by or distinct that would have fewer than 3 frames to partition with sorts instead, since sorting needs only 1. With these two changes, every plan for the Module 4 workload runs at B = 4 with any join algorithm (a test checks this).
+
 ## Temporary files
 
 Runs and partitions are files in `DIR/.tmp/`. Writing one uses 1 frame: I fill a page and write it when it is full. Reading uses 1 frame. These reads and writes are charged to the operator that made the file. Files are deleted on `close`, and after every plan the runner checks that `.tmp` is empty and no frame is pinned.

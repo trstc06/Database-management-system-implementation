@@ -1,0 +1,4 @@
+#!/bin/sh
+# Module 4 query optimizer.
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m dbms.optimizer.cli "$@"

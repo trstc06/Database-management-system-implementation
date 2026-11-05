@@ -7,7 +7,12 @@ changing existing ones.
 
     kind 1  TABLE    name, file, num_pages, num_tuples
     kind 2  COLUMN   table, position, name, type, length (0 for INT)
-    kind 3, 4        reserved for Module 4 statistics and histogram buckets
+    kind 3  STATS    table, column, ndv, total_bytes, min, max
+    kind 4  BUCKET   table, column, index, low, high, count, ndv
+
+Statistics come from ANALYZE (Module 4). min, max, low and high are kept
+as text whatever the column type; the optimizer turns them back into
+values using the column's type.
 
 num_pages counts data pages only, not directory pages.
 """
@@ -19,7 +24,7 @@ from ..common.schema import INT, MAX_VARCHAR, VARCHAR, Column
 from .heap import HeapFile
 from .record import decode_record, encode_record
 
-TABLE_KIND, COLUMN_KIND = 1, 2
+TABLE_KIND, COLUMN_KIND, STATS_KIND, BUCKET_KIND = 1, 2, 3, 4
 KIND_FIELD = struct.Struct('<i')
 
 
@@ -33,7 +38,12 @@ RECORD_SCHEMAS = {
                                 ('num_pages', INT), ('num_tuples', INT)),
     COLUMN_KIND: catalog_columns(('kind', INT), ('table', VARCHAR), ('position', INT),
                                  ('name', VARCHAR), ('type', VARCHAR), ('length', INT)),
+    STATS_KIND: catalog_columns(('kind', INT), ('table', VARCHAR), ('column', VARCHAR), ('ndv', INT),
+                                ('total_bytes', INT), ('min', VARCHAR), ('max', VARCHAR)),
+    BUCKET_KIND: catalog_columns(('kind', INT), ('table', VARCHAR), ('column', VARCHAR), ('index', INT),
+                                 ('low', VARCHAR), ('high', VARCHAR), ('count', INT), ('ndv', INT)),
 }
+STATS_KINDS = (STATS_KIND, BUCKET_KIND)
 
 
 @dataclass(frozen=True)
@@ -68,6 +78,7 @@ class Catalog:
         self.heap = heap
         self.tables = {}       # name -> TableInfo, in creation order
         self.table_rids = {}   # name -> rid of its TABLE record
+        self.stats = {}        # table -> [(rid, values)] of its STATS and BUCKET records
         self.load()
 
     def load(self) -> None:
@@ -78,6 +89,8 @@ class Catalog:
                 _, name, file, num_pages, num_tuples = values
                 self.tables[name] = TableInfo(name, (), file, num_pages, num_tuples)
                 self.table_rids[name] = rid
+            elif values[0] in STATS_KINDS:
+                self.stats.setdefault(values[1], []).append((rid, values))
             else:
                 _, table, position, name, kind, length = values
                 columns.setdefault(table, []).append(
@@ -103,6 +116,22 @@ class Catalog:
 
     def list_tables(self) -> list[str]:
         return list(self.tables)
+
+    def stat_records(self, table: str) -> list[tuple]:
+        return [values for _, values in self.stats.get(table, [])]
+
+    def replace_stats(self, table: str, records: list[tuple]) -> bool:
+        """Store new STATS and BUCKET records. Identical ones are left alone,
+        so a second ANALYZE of unchanged data writes nothing. Returns True if
+        anything changed."""
+        self.get_table(table)
+        if self.stat_records(table) == records:
+            return False
+        for rid, _ in self.stats.get(table, []):
+            self.heap.delete(rid)
+        self.stats[table] = [(self.heap.insert(encode_record(values, RECORD_SCHEMAS[values[0]])), values)
+                             for values in records]
+        return True
 
     def update_counts(self, name: str, num_pages: int, num_tuples: int) -> TableInfo:
         """Rewrite the TABLE record in place. The counts are fixed-width INTs

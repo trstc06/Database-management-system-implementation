@@ -35,3 +35,13 @@ AI mistakes:
 
 - The AI's JSON catalog reader only understood types written like `VARCHAR(20)`, so a column written as `["name", "VARCHAR", 20]` failed with a schema error. I found it the first time I compiled the handout's examples, and fixed the reader to take both forms.
 - The AI put the `Output` class in the translator and imported it into the grouping code, which the translator also imports. That is a circular import. I moved `Output` into `scope.py`, which both files already use.
+
+## 2026-11-04: Module 4
+
+I wrote ANALYZE, the selectivity estimates, the seven rewrite rules, the cost model, the DP join ordering and the `opt` command. The Section 3 rewrite and the Section 5.1 DP table both reproduce. I matched my cost formulas to what Module 2 actually does, and `docs/DESIGN_M4.md` lists every place they differ from the handout. The published dataset and workload aren't in my folder yet, so I built a stand-in (`experiments/m4_data.py`) where salary is built from age.
+
+AI mistakes:
+
+- The AI's hash cost for group_by and distinct left out the dump Module 2 writes when the table overflows. So for one query the optimizer picked hash over sort, and it did 130 I/Os instead of the 88 that sort did. I found it by comparing estimated and actual I/O for every workload query, then added the dump to the formula.
+- The AI's new sort cost looped forever when a sort merge join's second sort was left with only 2 frames, because a fan-in of 1 never reduces the number of runs. The tests hung and I had to stop them. Module 2 never merges with fewer than 3 frames, so I made the formula do the same.
+- The AI's Module 2 frame rule only worked for one blocking operator at a time. Once the optimizer put a group by over a join at B = 4, the join kept so many frames that the group by was left with 2, and the plan failed. My Module 2 tests never stacked operators, so they missed it. I found it by running every workload plan at B = 4 and 5. Now an operator that can't stream in the frames it's given writes its output to a temp file first.

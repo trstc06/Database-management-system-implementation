@@ -12,18 +12,22 @@ from .base import END, Operator
 class SeqScan(Operator):
     name = 'seqscan'
 
-    def __init__(self, ctx, table: str) -> None:
+    def __init__(self, ctx, table: str, alias: str | None = None) -> None:
         super().__init__(ctx, [])
         self.table = ctx.db.table(table)
         self.table_name = table
+        self.alias = alias
         stored = self.table.columns
-        self.columns = tuple(replace(column, qualifier=table, show_qualifier=True) for column in stored)
+        self.columns = tuple(replace(column, qualifier=alias or table, show_qualifier=True) for column in stored)
         self.stored = stored
 
     def label(self) -> str:
-        return f'seqscan {self.table_name}'
+        return f'seqscan {self.table_name}' + (f' as {self.alias}' if self.alias else '')
 
-    def streaming_frames(self) -> int:
+    def stream_frames(self) -> int:
+        return 1
+
+    def min_keep(self) -> int:
         return 1
 
     def produce(self):
@@ -96,6 +100,26 @@ class Limit(Operator):
             yield row
             if self.tuples_out >= self.count:
                 return
+
+
+class Rename(Operator):
+    """Requalify every column as alias.column, as a FROM alias does."""
+    name = 'rename'
+
+    def __init__(self, ctx, alias: str, child: Operator) -> None:
+        super().__init__(ctx, [child])
+        self.alias = alias
+        self.columns = tuple(Column(alias, c.name, c.type, c.length, show_qualifier=True) for c in child.columns)
+        check_unique(self.columns)
+
+    def label(self) -> str:
+        return f'rename {self.alias}'
+
+    start = Filter.start
+    stop = Filter.stop
+
+    def produce(self):
+        yield from self.pull(self.children[0])
 
 
 def check_compatible(name: str, left: Operator, right: Operator) -> None:

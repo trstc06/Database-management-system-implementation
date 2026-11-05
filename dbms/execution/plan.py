@@ -9,20 +9,21 @@ rejected before any page is read.
 from ..common.errors import DbError, ExecutionError
 from .aggregate import Distinct, GroupBy
 from .joins import HashJoin, NestedLoopJoin, SortMergeJoin
-from .pipeline import Filter, Limit, Project, SeqScan, UnionAll
+from .pipeline import Filter, Limit, Project, Rename, SeqScan, UnionAll
 from .setops import Except, Intersect, Union
 from .sort import Sort
 
 # op -> (required fields with their JSON type, child fields)
 SHAPES = {
     'seqscan': ({'table': str}, ()),
+    'rename': ({'to': str}, ('child',)),
     'filter': ({'condition': str}, ('child',)),
     'project': ({'columns': list}, ('child',)),
     'distinct': ({'mode': str}, ('child',)),
     'sort': ({'keys': list}, ('child',)),
     'group_by': ({'mode': str, 'keys': list, 'aggregates': list}, ('child',)),
     'limit': ({}, ('child',)),
-    'nested_loop_join': ({'condition': str}, ('left', 'right')),
+    'nested_loop_join': ({}, ('left', 'right')),
     'sort_merge_join': ({'condition': str}, ('left', 'right')),
     'hash_join': ({'condition': str}, ('left', 'right')),
     'union_all': ({}, ('left', 'right')),
@@ -56,7 +57,10 @@ def check_node(node, path: str) -> str:
             raise fail(op, path, f"missing required field '{child}'")
     if op == 'limit' and not any(isinstance(node.get(f), int) for f in LIMIT_FIELDS):
         raise fail(op, path, "needs a whole number field 'n'")
-    optional = {'limit': set(LIMIT_FIELDS), 'project': {'aliases'}}.get(op, set())
+    optional = {'limit': set(LIMIT_FIELDS), 'project': {'aliases'}, 'seqscan': {'alias'},
+                'nested_loop_join': {'condition'}}.get(op, set())
+    if op == 'nested_loop_join' and not isinstance(node.get('condition', ''), str):
+        raise fail(op, path, "field 'condition' must be a str")
     allowed = set(fields) | set(children) | {'op'} | optional
     extra = sorted(set(node) - allowed - {'est_rows', 'est_pages', 'est_cost', 'alias'})
     if extra:
@@ -77,7 +81,9 @@ def build(ctx, node, path: str = 'root'):
 
 def make(ctx, op: str, node: dict, kids: dict):
     if op == 'seqscan':
-        return SeqScan(ctx, node['table'])
+        return SeqScan(ctx, node['table'], node.get('alias'))
+    if op == 'rename':
+        return Rename(ctx, node['to'], kids['child'])
     if op == 'filter':
         return Filter(ctx, node['condition'], kids['child'])
     if op == 'project':
@@ -92,7 +98,7 @@ def make(ctx, op: str, node: dict, kids: dict):
         count = next(node[f] for f in LIMIT_FIELDS if isinstance(node.get(f), int))
         return Limit(ctx, count, kids['child'])
     if op in JOINS:
-        return JOINS[op](ctx, node['condition'], kids['left'], kids['right'])
+        return JOINS[op](ctx, node.get('condition', ''), kids['left'], kids['right'])
     return SET_OPS[op](ctx, kids['left'], kids['right'])
 
 
