@@ -5,12 +5,15 @@
 Every number comes from running the storage engine; nothing is computed
 from a formula except the "computed" capacity column it is compared with.
 Traces are read from --traces (one page id per line, files sorted by name).
-Without published traces, the script builds the one the handout describes
-exactly, a sequential scan of an 80 page file repeated ten times.
+The only files published with the project are the module pages, so without
+--traces the script builds five traces itself: trace 3 exactly as the
+handout describes it (a sequential scan of an 80 page file repeated ten
+times) and four of my own, made from a fixed seed so every run is the same.
 """
 
 import argparse
 import json
+import random
 import tempfile
 from pathlib import Path
 from dbms.common.schema import INT, VARCHAR, Column
@@ -22,6 +25,13 @@ from dbms.storage.page import USABLE_SPACE
 POOL_SIZES = (4, 16, 64, 256)
 SCAN_FRAMES = (2, 8, 64)
 SCAN_PAGES = 500
+SEED = 3005
+FILE_PAGES = 500                     # bigger than every pool size
+RANDOM_FETCHES = 2000
+HOT_PAGES = 50                       # 10 percent of the file
+HOT_SHARE = 0.9
+LOOP_PAGES, LOOP_REPEATS = 20, 40    # a loop slightly larger than B = 16
+MIXED_HOT_PAGES = 10
 
 
 def capacity_schemas() -> list[dict]:
@@ -68,9 +78,33 @@ def sequential_trace(pages: int = 80, repeats: int = 10) -> list[int]:
     return list(range(pages)) * repeats
 
 
+def uniform_trace(rng: random.Random) -> list[int]:
+    return [rng.randrange(FILE_PAGES) for _ in range(RANDOM_FETCHES)]
+
+
+def hot_set_trace(rng: random.Random) -> list[int]:
+    """90 percent of fetches go to the first 10 percent of the pages."""
+    return [rng.randrange(HOT_PAGES) if rng.random() < HOT_SHARE else rng.randrange(HOT_PAGES, FILE_PAGES)
+            for _ in range(RANDOM_FETCHES)]
+
+
+def scan_with_hot_trace(rng: random.Random) -> list[int]:
+    """One scan of 500 pages, with a fetch of one of 10 hot pages after every scan page."""
+    return [page for scan_page in range(MIXED_HOT_PAGES, MIXED_HOT_PAGES + FILE_PAGES)
+            for page in (scan_page, rng.randrange(MIXED_HOT_PAGES))]
+
+
+def built_traces() -> dict[str, list[int]]:
+    return {'trace3 (rebuilt from the handout)': sequential_trace(),
+            'own1 uniform random': uniform_trace(random.Random(SEED)),
+            'own2 hot set 90/10': hot_set_trace(random.Random(SEED)),
+            'own3 loop of 20 pages': sequential_trace(LOOP_PAGES, LOOP_REPEATS),
+            'own4 scan with hot pages': scan_with_hot_trace(random.Random(SEED))}
+
+
 def read_traces(folder: Path | None) -> dict[str, list[int]]:
     if folder is None:
-        return {'trace3 (rebuilt from the handout)': sequential_trace()}
+        return built_traces()
     traces = {}
     for path in sorted(folder.iterdir()):
         if path.is_file():
