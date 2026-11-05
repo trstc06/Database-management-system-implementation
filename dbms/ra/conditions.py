@@ -15,6 +15,8 @@ from .tree import Node
 
 Predicate = Callable[[tuple], bool]
 
+NUMERIC = (INT, 'REAL')   # AVG results compare with whole numbers
+
 COMPARE = {'Eq': operator.eq, 'Ne': operator.ne, 'Lt': operator.lt,
            'Le': operator.le, 'Gt': operator.gt, 'Ge': operator.ge}
 
@@ -49,7 +51,8 @@ def bind_condition(node: Node, columns: tuple[Column, ...]) -> Predicate:
         return lambda row: left(row) or right(row)
     left_type, left = bind_operand(node.children[0], columns)
     right_type, right = bind_operand(node.children[1], columns)
-    if left_type is not None and right_type is not None and left_type != right_type:
+    both_numeric = left_type in NUMERIC and right_type in NUMERIC
+    if left_type is not None and right_type is not None and left_type != right_type and not both_numeric:
         raise ExecutionError('Type', f'cannot compare {type_label(left_type)} with {type_label(right_type)}')
     compare = COMPARE[node.kind]
     return lambda row: compare(left(row), right(row))

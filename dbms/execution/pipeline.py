@@ -2,7 +2,7 @@
 
 from dataclasses import replace
 from ..common.errors import ExecutionError
-from ..common.schema import check_unique, resolve
+from ..common.schema import Column, check_unique, resolve
 from ..ra.conditions import bind_condition
 from ..ra.parser import parse_condition
 from ..storage.record import decode_record
@@ -59,10 +59,15 @@ class Filter(Operator):
 class Project(Operator):
     name = 'project'
 
-    def __init__(self, ctx, names: list[str], child: Operator) -> None:
+    def __init__(self, ctx, names: list[str], child: Operator, aliases: list | None = None) -> None:
         super().__init__(ctx, [child])
         self.positions = [resolve(name, child.columns) for name in names]
-        self.columns = tuple(child.columns[index] for index in self.positions)
+        aliases = aliases or [None] * len(names)
+        if len(aliases) != len(names):
+            raise ExecutionError('plan', f'project has {len(names)} columns but {len(aliases)} aliases')
+        self.columns = tuple(child.columns[index] if alias is None else
+                             Column(None, alias, child.columns[index].type, child.columns[index].length)
+                             for index, alias in zip(self.positions, aliases))
         check_unique(self.columns)
 
     start = Filter.start

@@ -26,3 +26,12 @@ AI mistakes:
 
 - The AI's sort told its parent how many pages it was using instead of how many frames it was holding. A sort over an empty table holds 1 frame but said 0, so a sort merge join at B = 4 handed out a frame it didn't have. The empty input test caught it.
 - When a hash group by had to split a partition again, the AI's code kept every new partition open while it worked on the first one. At B = 4 that ran out of frames. I now finish all of them before going into any.
+
+## 2026-11-04: Module 3
+
+I wrote the SQL lexer, parser and translator, and the `sql` command. All the Section 5 examples come out as the same plans, and the fifteen required cases are tests. My grammar has small changes from the sketch, listed in `docs/GRAMMAR_SQL.md`. Where duplicates get removed is the first section of `docs/DESIGN_M3.md`.
+
+AI mistakes:
+
+- The AI's JSON catalog reader only understood types written like `VARCHAR(20)`, so a column written as `["name", "VARCHAR", 20]` failed with a schema error. I found it the first time I compiled the handout's examples, and fixed the reader to take both forms.
+- The AI put the `Output` class in the translator and imported it into the grouping code, which the translator also imports. That is a circular import. I moved `Output` into `scope.py`, which both files already use.

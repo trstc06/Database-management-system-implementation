@@ -210,16 +210,17 @@ class Distinct(Grouping):
         return key
 
 
-def aggregate_column(function: str, argument: str, child: Operator) -> tuple[Column, int | None]:
+def aggregate_column(function: str, argument: str, child: Operator,
+                     alias: str | None = None) -> tuple[Column, int | None]:
     if function not in AGGREGATES:
         raise ExecutionError('plan', f'unknown aggregate {function!r}; use count, sum, avg, min or max')
     if argument == '*':
         if function != 'count':
             raise ExecutionError('plan', f'{function}(*) is not allowed; only count(*)')
-        return Column(None, 'count_star', INT, 8), None
+        return Column(None, alias or 'count_star', INT, 8), None
     index = resolve(argument, child.columns)
     source = child.columns[index]
-    name = f'{function}_{source.qualified_name.replace(".", "_")}'
+    name = alias or f'{function}_{source.qualified_name.replace(".", "_")}'
     if function in ('sum', 'avg') and source.type != INT:
         raise ExecutionError('Type', f'{function} needs an INT column, {source.qualified_name} is {source.type}')
     if function in ('count', 'sum'):
@@ -235,8 +236,12 @@ class GroupBy(Grouping):
     def __init__(self, ctx, mode: str, keys: list[str], aggregates: list, child: Operator) -> None:
         positions = [resolve(name, child.columns) for name in keys]
         super().__init__(ctx, mode, child, positions)
-        specs = [aggregate_column(function, argument, child) for function, argument in aggregates]
-        self.functions = [function for function, _ in aggregates]
+        for spec in aggregates:
+            if not isinstance(spec, list) or len(spec) not in (2, 3):
+                raise ExecutionError('plan', f'an aggregate must be [function, column] or [function, column, name], got {spec!r}')
+        specs = [aggregate_column(*spec, child) if len(spec) == 2 else aggregate_column(spec[0], spec[1], child, spec[2])
+                 for spec in aggregates]
+        self.functions = [spec[0] for spec in aggregates]
         self.arguments = [index for _, index in specs]
         self.columns = self.key_columns + tuple(column for column, _ in specs)
 

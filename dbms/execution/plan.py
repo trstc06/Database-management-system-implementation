@@ -56,7 +56,8 @@ def check_node(node, path: str) -> str:
             raise fail(op, path, f"missing required field '{child}'")
     if op == 'limit' and not any(isinstance(node.get(f), int) for f in LIMIT_FIELDS):
         raise fail(op, path, "needs a whole number field 'n'")
-    allowed = set(fields) | set(children) | {'op'} | (set(LIMIT_FIELDS) if op == 'limit' else set())
+    optional = {'limit': set(LIMIT_FIELDS), 'project': {'aliases'}}.get(op, set())
+    allowed = set(fields) | set(children) | {'op'} | optional
     extra = sorted(set(node) - allowed - {'est_rows', 'est_pages', 'est_cost', 'alias'})
     if extra:
         raise fail(op, path, f"unexpected field '{extra[0]}'")
@@ -80,7 +81,7 @@ def make(ctx, op: str, node: dict, kids: dict):
     if op == 'filter':
         return Filter(ctx, node['condition'], kids['child'])
     if op == 'project':
-        return Project(ctx, node['columns'], kids['child'])
+        return Project(ctx, node['columns'], kids['child'], node.get('aliases'))
     if op == 'distinct':
         return Distinct(ctx, node['mode'], kids['child'])
     if op == 'sort':

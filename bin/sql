@@ -1,0 +1,4 @@
+#!/bin/sh
+# Module 3 SQL front end.
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m dbms.sql.cli "$@"
