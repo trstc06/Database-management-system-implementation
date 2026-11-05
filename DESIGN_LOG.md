@@ -54,3 +54,9 @@ AI mistakes:
 
 - The AI's statement splitter gave each statement its own line numbers, so in a workload file an error in the third query said "line 2". I saw it in the first workload report and made each statement keep its real line and column.
 - In the AI's first version of the shell, error messages showed up before the output of statements that ran earlier. Errors went to stderr right away, while normal output waited in a buffer. I saw it running a setup script and added a flush after each statement's output.
+
+## 2026-11-05: Module 1 traces
+
+The handout says five traces are published with Module 1, but the only files attached to the project are the four module pages. A TA confirmed this on the forum. So `experiments/m1_measure.py` now builds trace 3 from the handout's description, plus four traces of my own from a fixed seed: uniform random, a 90/10 hot set, a loop just bigger than B = 16, and a scan with hot pages mixed in. `--traces DIR` still runs real trace files if they're ever posted.
+
+With only trace 3, I had picked CLOCK, because both policies got the same hit rates. The new traces changed my answer. LRU ties or beats CLOCK in 19 of the 20 rows, and does clearly better when a few pages are used much more than the rest. So `docs/REPORT_M1.md` now says I would ship LRU.
