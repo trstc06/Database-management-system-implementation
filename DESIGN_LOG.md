@@ -38,7 +38,7 @@ AI mistakes:
 
 ## 2026-11-04: Module 4
 
-I wrote ANALYZE, the selectivity estimates, the seven rewrite rules, the cost model, the DP join ordering and the `opt` command. The Section 3 rewrite and the Section 5.1 DP table both reproduce. I matched my cost formulas to what Module 2 actually does, and `docs/DESIGN_M4.md` lists every place they differ from the handout. The published dataset and workload aren't in my folder yet, so I built a stand-in (`experiments/m4_data.py`) where salary is built from age.
+I wrote ANALYZE, the selectivity estimates, the seven rewrite rules, the cost model, the DP join ordering and the `opt` command. The Section 3 rewrite and the Section 5.1 DP table both reproduce. I matched my cost formulas to what Module 2 actually does, and `docs/DESIGN_M4.md` lists every place they differ from the handout. The only files published with the project are the four module pages (a TA confirmed this on the forum), so I built my own dataset (`experiments/m4_data.py`) and twenty-query workload (`experiments/m4_workload.sql`). In Emp, salary is built from age, so the two are strongly correlated.
 
 AI mistakes:
 

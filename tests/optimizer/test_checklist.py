@@ -1,4 +1,4 @@
-"""The Section 8 checklist, on a small copy of the stand-in dataset."""
+"""The Section 8 checklist, on a small copy of my own dataset."""
 
 import copy
 import tempfile

@@ -1,4 +1,5 @@
--- Stand-in workload for Module 4: twenty queries over experiments/m4_data.py.
+-- My own twenty-query workload for Module 4, over experiments/m4_data.py.
+-- The only files published with the project are the module pages.
 -- Multi-table queries use JOIN ON so the unoptimized baseline (written order,
 -- block nested loop, no pushdown) still finishes; q04 and q11 use commas.
 

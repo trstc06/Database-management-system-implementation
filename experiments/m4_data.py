@@ -1,4 +1,5 @@
-"""A stand-in for the Module 4 dataset until the published one is available.
+"""My own Module 4 dataset. The only files published with the project are
+the module pages, so there is no supplied dataset to load.
 
 Four tables shaped like the handout's examples. Emp.salary is built from
 Emp.age (salary = 1000 x age plus up to 4,999), so the two are strongly

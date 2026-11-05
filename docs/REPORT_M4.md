@@ -2,7 +2,7 @@
 
 All numbers come from `python3 -m experiments.m4_measure --out experiments/results/m4.json`.
 
-> **Stand-in data:** the published dataset and twenty-query workload aren't in my folder yet. I used my own: `experiments/m4_data.py` (Emp 4,000 rows on 83 pages, Dept 50, Proj 300, Site 600) and `experiments/m4_workload.sql`. In Emp, salary is 1000 × age plus up to 4,999, so age and salary are strongly correlated. The script takes no other input, so the published files would need a small change to load.
+> **My own data:** the handout says a dataset and a twenty-query workload are published with it, but the only files attached to the project are the four module pages. A TA (Abdelghny Orogat) confirmed this on the course forum on Oct 19. So I built my own: `experiments/m4_data.py` (Emp 4,000 rows on 83 pages, Dept 50, Proj 300, Site 600) and `experiments/m4_workload.sql`. In Emp, salary is 1000 × age plus up to 4,999, so age and salary are strongly correlated.
 
 ANALYZE ran on every table first. B = 16 unless I say otherwise.
 

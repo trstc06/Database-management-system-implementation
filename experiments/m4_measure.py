@@ -1,4 +1,4 @@
-"""Module 4 measurements (Section 7) on the stand-in dataset and workload.
+"""Module 4 measurements (Section 7) on my own dataset and workload.
 
     python3 -m experiments.m4_measure --out experiments/results/m4.json
 
