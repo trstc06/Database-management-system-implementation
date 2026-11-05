@@ -42,7 +42,7 @@ The pool has B frames and looks pages up by (file, page id). It counts hits, mis
 |---|---|---|
 | 1 | TABLE | name, file, num_pages, num_tuples |
 | 2 | COLUMN | table, position, name, type, length (0 for INT) |
-| 3, 4 | saved for Module 4 | statistics and histogram buckets |
+| 3, 4 | STATS and BUCKET, added in Module 4 | see `docs/DESIGN_M4.md` |
 
 Names and types are VARCHAR(255); the rest are INT. `num_pages` counts data pages only. After a load I overwrite the TABLE record in place, since its length doesn't change. The catalog has its own 4 frame buffer pool, so `storage scan` only counts table pages.
 

@@ -151,3 +151,8 @@ Subset        Best plan considered                                         Cost
 ```
 
 The written order joins Site, Proj, Dept, then Emp. The DP instead joins Emp to Proj first, because the only predicate on Emp is `e.eid = p.lead`, and Proj is just 2 pages. It adds Site and Dept after that. Pairs with no predicate between them, like {s, d}, are skipped.
+
+## Reading
+
+- **Selinger et al., "Access Path Selection in a Relational Database Management System", SIGMOD 1979.** This is where the DP over join orders comes from. It builds the best plan for each set of relations from smaller sets, adds one relation at a time as the inner of a join, and avoids Cartesian products unless nothing else is possible. My enumerator follows those choices. My default selectivities with no statistics (1/10 for equality, 1/3 for a range) are the defaults from that paper.
+- **Leis et al., "How Good Are Query Optimizers, Really?", VLDB 2015.** They show that bad plans come mostly from bad cardinality estimates, not from the cost model. They also show that the independence assumption makes estimates too low, and that errors grow as more predicates and joins are multiplied together. That's why I measure q-error at every node, not just total cost, and why I built the "where it breaks" query around two correlated columns.

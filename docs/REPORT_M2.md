@@ -76,3 +76,8 @@ Splitting again could not help, since every row with key 0 hashes to the same pl
 ## The budget
 
 I sorted an 80 page table (20 x B) at B = 4. It finished in 4 passes with 321 reads and 240 writes, and the output was in order. The most frames held at once was 4. I know this because every frame an operator uses, including sort runs and hash tables, is a pinned frame in the one buffer pool. The pool records the highest number pinned at any moment, and it raises an error rather than go past B. Running the same plan twice gave the same counters.
+
+## Reading
+
+- **Graefe, "Volcano: An Extensible and Parallel Query Evaluation System", IEEE TKDE 1994.** Volcano gives every operator the same open, next, close interface, and a parent pulls tuples from its children without knowing what they are. That's why all my operators extend one `Operator` class, why a join can take a scan, a sort or another join as input unchanged, and why counting reads and writes per operator only needed one wrapper in the base class.
+- **Shapiro, "Join Processing in Database Systems with Large Main Memories", ACM TODS 1986.** Shapiro compares sort merge with simple, GRACE and hybrid hash joins. He shows that GRACE hash join needs memory of roughly the square root of the build input, so that each partition fits. I built the GRACE version: partition both sides, then build and probe one partition at a time. The square root limit is what the crossover and skew sections above show, where hash join loses once a partition can't fit in B − 1 pages.

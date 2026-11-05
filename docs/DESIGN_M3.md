@@ -45,3 +45,8 @@ Comparisons need the same type on both sides. AVG gives a REAL, which can be com
 - `compile --json` prints one plan for one statement and a list for several. `--catalog` works as another name for `--db`, and either one can be a database folder or a JSON catalog file.
 
 I changed Module 2 so it accepts the aggregate names, the project aliases, and REAL compared with INT. That way these plans run once Module 4 makes them physical.
+
+## Reading
+
+- **Nystrom, "Crafting Interpreters".** His parser has one method per grammar rule, and precedence comes from which rule calls which: lower precedence rules call higher ones. I wrote `condition`, `conjunction` and `negation` that way, so NOT, AND and OR precedence lives in the grammar, as Section 2 asks, not in special code. I also took his "panic mode" idea of reporting the first error clearly and stopping.
+- **The PostgreSQL documentation on SELECT.** It says UNION, INTERSECT and EXCEPT remove duplicates unless ALL is written, and that ORDER BY can use an output column's name or an input column. That's how I decided where duplicates are removed (the table at the top) and why ORDER BY looks at output names first, then the FROM tables.
