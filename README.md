@@ -8,6 +8,9 @@ From this folder:
 
 ```sh
 python3 -m unittest discover -s tests -t .
+./bin/dbms --db db                                  # the SQL shell; statements end with ;
+./bin/dbms --db db --file setup.sql
+./bin/dbms --db db --workload queries.sql --out report.md
 ./bin/ra --tree "distinct(project[a](R)) union S"
 ./bin/ra --relations tables.txt --query "project[DID](Employees)"
 ./bin/storage create-table --db db --name R --schema "a:INT,b:VARCHAR(20),c:INT"
@@ -35,6 +38,7 @@ Each tool in `bin/` is a short script that runs the matching Python module. Run 
 
 | Path | Contents |
 |---|---|
+| `dbms/shell/` | The integrated shell: SQL, EXPLAIN, EXPLAIN ANALYZE, ANALYZE, SET frames, LOAD, and the workload report |
 | `dbms/common/` | Errors, column types and column name lookup, shared by every module |
 | `dbms/ra/` | My Bonus 1 engine, split up so other modules can use it |
 | `dbms/storage/` | Module 1: pages, the buffer pool, heap files, the catalog and the CSV loader |
@@ -46,4 +50,4 @@ Each tool in `bin/` is a short script that runs the matching Python module. Run 
 | `docs/` | Design documents and reports |
 | `DESIGN_LOG.md` | What I tried, what broke, and where AI help was wrong |
 
-`docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1, `docs/DESIGN_M2.md` and `docs/REPORT_M2.md` cover Module 2, `docs/GRAMMAR_SQL.md` and `docs/DESIGN_M3.md` cover Module 3, and `docs/DESIGN_M4.md` and `docs/REPORT_M4.md` cover Module 4.
+`ARCHITECTURE.md` describes the whole system and how the modules talk to each other. `docs/REFACTOR.md` explains how I changed the Bonus 1 engine in week one. `docs/DESIGN_M1.md` and `docs/REPORT_M1.md` cover Module 1, `docs/DESIGN_M2.md` and `docs/REPORT_M2.md` cover Module 2, `docs/GRAMMAR_SQL.md` and `docs/DESIGN_M3.md` cover Module 3, and `docs/DESIGN_M4.md` and `docs/REPORT_M4.md` cover Module 4.

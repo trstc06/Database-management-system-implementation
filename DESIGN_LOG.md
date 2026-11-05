@@ -45,3 +45,12 @@ AI mistakes:
 - The AI's hash cost for group_by and distinct left out the dump Module 2 writes when the table overflows. So for one query the optimizer picked hash over sort, and it did 130 I/Os instead of the 88 that sort did. I found it by comparing estimated and actual I/O for every workload query, then added the dump to the formula.
 - The AI's new sort cost looped forever when a sort merge join's second sort was left with only 2 frames, because a fan-in of 1 never reduces the number of runs. The tests hung and I had to stop them. Module 2 never merges with fewer than 3 frames, so I made the formula do the same.
 - The AI's Module 2 frame rule only worked for one blocking operator at a time. Once the optimizer put a group by over a join at B = 4, the join kept so many frames that the group by was left with 2, and the plan failed. My Module 2 tests never stacked operators, so they missed it. I found it by running every workload plan at B = 4 and 5. Now an operator that can't stream in the frames it's given writes its output to a temp file first.
+
+## 2026-11-05: Integration
+
+I wired the four modules into one shell, `bin/dbms`. It takes SQL plus EXPLAIN, EXPLAIN ANALYZE, ANALYZE table, SET frames = n and LOAD table FROM file. With `--workload`, it reports each query's rows, page I/O, wall time, and estimated against actual root rows. The module tools still work. `ARCHITECTURE.md` describes the whole system.
+
+AI mistakes:
+
+- The AI's statement splitter gave each statement its own line numbers, so in a workload file an error in the third query said "line 2". I saw it in the first workload report and made each statement keep its real line and column.
+- In the AI's first version of the shell, error messages showed up before the output of statements that ran earlier. Errors went to stderr right away, while normal output waited in a buffer. I saw it running a setup script and added a flush after each statement's output.

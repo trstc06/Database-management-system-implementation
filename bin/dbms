@@ -1,0 +1,4 @@
+#!/bin/sh
+# The integrated SQL shell (all four modules).
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}" exec python3 -m dbms.shell.cli "$@"
