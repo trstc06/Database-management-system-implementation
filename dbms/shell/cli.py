@@ -21,15 +21,15 @@ QUIT_WORDS = ('quit', 'exit', '\\q')
 
 
 def run_statement(session: Session, text: str) -> bool:
-    """Print the statement's output or its error. Returns False on an error."""
+    """Print the statement's output or its error, then a blank line. Returns False on an error."""
     try:
-        print(session.execute(text), flush=True)
+        print(session.execute(text) + '\n', flush=True)
         return True
     except DbError as error:
-        print(error.unified(), file=sys.stderr)
+        print(error.unified() + '\n', file=sys.stderr, flush=True)
         return False
     except OSError as error:
-        print(f'error: schema: {error}', file=sys.stderr)
+        print(f'error: schema: {error}\n', file=sys.stderr, flush=True)
         return False
 
 

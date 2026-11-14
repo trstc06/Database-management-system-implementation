@@ -45,28 +45,52 @@ class SessionCommands(unittest.TestCase):
     def test_query_returns_rows(self):
         output = self.session.execute('SELECT e.name, d.title FROM Emp e JOIN Dept d ON e.did = d.did '
                                       'WHERE e.age > 40 ORDER BY e.name')
-        self.assertEqual(output.splitlines(), ['e.name | d.title', 'bob | it', 'dee | it',
-                                               "o'neil, c | sales", '(3 rows)'])
+        self.assertEqual(output.splitlines(), [' e.name    | d.title',
+                                               '-----------+---------',
+                                               ' bob       | it',
+                                               ' dee       | it',
+                                               " o'neil, c | sales",
+                                               '(3 rows)'])
+
+    def test_numbers_are_right_aligned_and_one_row_is_singular(self):
+        output = self.session.execute('SELECT did, COUNT(*) AS number_of_people FROM Emp GROUP BY did ORDER BY did')
+        self.assertEqual(output.splitlines(), [' Emp.did | number_of_people',
+                                               '---------+------------------',
+                                               '       1 |                2',
+                                               '       2 |                2',
+                                               '(2 rows)'])
+        self.assertEqual(self.session.execute('SELECT name FROM Emp WHERE eid = 1').splitlines()[-1], '(1 row)')
 
     def test_count_star_on_an_empty_table_is_one_row(self):
         self.session.execute('CREATE TABLE Empty (a INT)')
-        self.assertEqual(self.session.execute('SELECT COUNT(*) FROM Empty').splitlines()[1:], ['0', '(1 rows)'])
+        lines = self.session.execute('SELECT COUNT(*) FROM Empty').splitlines()
+        self.assertEqual([line.strip() for line in lines[2:]], ['0', '(1 row)'])
 
     def test_explain_shows_estimates_without_running(self):
         output = self.session.execute('EXPLAIN SELECT name FROM Emp WHERE age > 40')
-        self.assertIn('seqscan Emp', output)
-        self.assertIn('est_rows=', output)
-        self.assertNotIn('rows: ', output)
+        lines = output.splitlines()
+        self.assertEqual(lines[0].split(), ['plan', 'est', 'rows', 'est', 'cost'])
+        self.assertTrue(lines[1].startswith('project [Emp.name]'))
+        self.assertTrue(lines[-1].lstrip(' │').startswith('└─ seqscan Emp'))
+        self.assertNotIn('actual', output)
 
     def test_explain_analyze_shows_estimated_and_actual(self):
         output = self.session.execute('explain analyze SELECT name FROM Emp WHERE age > 40')
-        self.assertIn('filter (Emp.age > 40)', output)
-        self.assertIn('rows=3', output)
-        self.assertTrue(output.splitlines()[-1].startswith('rows: 3   page I/O: '))
+        lines = output.splitlines()
+        self.assertEqual(lines[0].split(), ['plan', 'est', 'rows', 'actual', 'est', 'cost', 'reads', 'writes'])
+        filter_line = next(line for line in lines if 'filter (Emp.age > 40)' in line)
+        self.assertEqual(filter_line.split()[-5:], ['3', '3', '1', '-', '-'])   # est, actual, cost, no I/O of its own
+        self.assertTrue(lines[-3].startswith('result:   3 rows in '))
+        self.assertTrue(lines[-2].startswith('page I/O: '))
+        self.assertEqual(lines[-1], 'memory:   8 frames')
+
+    def test_long_column_lists_are_cut_short_in_plans(self):
+        output = self.session.execute('EXPLAIN SELECT * FROM Emp e JOIN Dept d ON e.did = d.did')
+        self.assertTrue(output.splitlines()[1].startswith('project [e.eid, e.name, e.age, ... 6 columns]'))
 
     def test_set_frames_changes_the_budget(self):
         self.assertEqual(self.session.execute('SET frames = 4'), 'SET frames = 4')
-        self.assertIn('frames: 4', self.session.execute('EXPLAIN ANALYZE SELECT name FROM Emp'))
+        self.assertIn('memory:   4 frames', self.session.execute('EXPLAIN ANALYZE SELECT name FROM Emp'))
         with self.assertRaises(DbError):
             self.session.execute('SET frames = 2')
         with self.assertRaises(DbError):
@@ -103,7 +127,8 @@ class CommandLine(unittest.TestCase):
         script.write_text("CREATE TABLE T (a INT);\nINSERT INTO T VALUES (7);\nSELECT a FROM T;\n")
         result = tool('dbms', '--db', str(work / 'db'), '--file', str(script))
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stdout.splitlines()[-2:], ['7', '(1 rows)'])
+        # a blank line follows each statement's output
+        self.assertEqual(result.stdout.splitlines()[-4:], ['-----', '   7', '(1 row)', ''])
         piped = tool('dbms', '--db', str(work / 'db'), stdin='SELECT a\nFROM T;\nquit\nSELECT b FROM T;\n')
         self.assertEqual((piped.returncode, piped.stderr), (0, ''))
         failed = tool('dbms', '--db', str(work / 'db'), stdin='SELECT b FROM T;\n')

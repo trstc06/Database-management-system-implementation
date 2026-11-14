@@ -13,15 +13,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from ..common.errors import DbError
 from ..common.schema import INT, VARCHAR, Column
-from ..execution.cli import format_rows
 from ..execution.run import run_plan
 from ..optimizer.cli import sql_catalog, table_columns
-from ..optimizer.explain import explain_physical, node_label
 from ..optimizer.planner import MIN_FRAMES, Planner
 from ..optimizer.stats import DEFAULT_BUCKETS, analyze, load_stats
 from ..sql.translate import compile_sql
 from ..storage.database import CATALOG_FILE, Database
 from ..storage.loader import load_csv
+from .display import format_explain, format_explain_analyze, format_table
 from .statements import blank_out, first_word
 
 DEFAULT_FRAMES = 32
@@ -35,14 +34,6 @@ class QueryRun:
     seconds: float
     est_root_rows: int
     output: str
-
-
-def walk(plan: dict) -> list[dict]:
-    nodes = [plan]
-    for key in ('child', 'left', 'right'):
-        if key in plan:
-            nodes += walk(plan[key])
-    return nodes
 
 
 class Session:
@@ -101,7 +92,7 @@ class Session:
         seconds = time.perf_counter() - started
         totals = result.totals()
         return QueryRun(len(result.rows), totals['page_reads'] + totals['page_writes'], seconds,
-                        physical['est_rows'], format_rows(result))
+                        physical['est_rows'], format_table([s[0] for s in result.schema()], result.rows))
 
     def query(self, text: str) -> QueryRun:
         with self.database() as db:
@@ -126,7 +117,7 @@ class Session:
 
     def explain(self, text: str) -> str:
         with self.database() as db:
-            return '\n'.join(explain_physical(self.physical(db, self.compile_one(db, text))))
+            return format_explain(self.physical(db, self.compile_one(db, text)))
 
     def explain_analyze(self, text: str) -> str:
         """The plan with estimated and actual rows at every node, then the totals."""
@@ -135,17 +126,10 @@ class Session:
             physical = self.physical(db, self.compile_one(db, text))
             result = run_plan(db, physical, self.frames)
             seconds = time.perf_counter() - started
-        lines = []
-        for node, (depth, _, counts) in zip(walk(physical), result.nodes):
-            loops = max(counts['opens'], 1)
-            actual = f"rows={round(counts['tuples_out'] / loops)}" + (f' loops={loops}' if loops > 1 else '')
-            label = '  ' * depth + node_label(node)
-            lines.append(f"{label:<52} est_rows={node['est_rows']:<8} {actual:<20} "
-                         f"est_cost={node['est_cost']:<7} reads={counts['page_reads']} writes={counts['page_writes']}")
         totals = result.totals()
-        lines.append(f"rows: {len(result.rows)}   page I/O: {totals['page_reads'] + totals['page_writes']} "
-                     f"(est {physical['est_cost']})   time: {seconds * 1000:.1f} ms   frames: {self.frames}")
-        return '\n'.join(lines)
+        counters = [counts for _, _, counts in result.nodes]
+        return format_explain_analyze(physical, counters, seconds, totals['page_reads'] + totals['page_writes'],
+                                      len(result.rows), self.frames)
 
     # Shell commands -----------------------------------------------------
 
