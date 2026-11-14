@@ -138,6 +138,21 @@ class LargeHashTests(unittest.TestCase):
                            'child': scan('R')}, 4)
         self.assertEqual(sum(r[1] for r in grouped.rows), 20 * ROWS_PER_PAGE)
 
+    def test_intersect_and_except_of_large_inputs_at_b_4(self):
+        # Arrange: both sides are 10 pages, so both sorts need several runs and a merge.
+        left_rows = random_rows(10 * ROWS_PER_PAGE, 3000, 7)
+        right_rows = random_rows(10 * ROWS_PER_PAGE, 3000, 8)
+        db = make_db({'R': (INTS, left_rows), 'S': (INTS, right_rows)})
+        side = lambda table: {'op': 'project', 'columns': [f'{table}.b'], 'child': scan(table)}
+        plan = lambda op: {'op': op, 'left': side('R'), 'right': side('S')}
+        left_keys, right_keys = {r[1] for r in left_rows}, {r[1] for r in right_rows}
+        # Act
+        intersect, minus = run(db, plan('intersect'), 4), run(db, plan('except'), 4)
+        # Assert
+        self.assertEqual(sorted(intersect.rows), sorted((k,) for k in left_keys & right_keys))
+        self.assertEqual(sorted(minus.rows), sorted((k,) for k in left_keys - right_keys))
+        self.assertLessEqual(max(intersect.peak_frames, minus.peak_frames), 4)
+
 
 if __name__ == '__main__':
     unittest.main()

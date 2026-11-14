@@ -60,3 +60,9 @@ AI mistakes:
 The handout says five traces are published with Module 1, but the only files attached to the project are the four module pages. A TA confirmed this on the forum. So `experiments/m1_measure.py` now builds trace 3 from the handout's description, plus four traces of my own from a fixed seed: uniform random, a 90/10 hot set, a loop just bigger than B = 16, and a scan with hot pages mixed in. `--traces DIR` still runs real trace files if they're ever posted.
 
 With only trace 3, I had picked CLOCK, because both policies got the same hit rates. The new traces changed my answer. LRU ties or beats CLOCK in 19 of the 20 rows, and does clearly better when a few pages are used much more than the rest. So `docs/REPORT_M1.md` now says I would ship LRU.
+
+## 2026-11-14: Final check
+
+Before submitting I ran every operator at B = 4, 5 and 8 on inputs of several pages each, and checked the answers against Python. `intersect` and `except` failed at B = 4 with "sort needs at least 3 frames to merge, has 2". The AI had given their left sort half the frames, which left the right sort only 2, and my set operator test used one-page inputs so the sorts never had to merge. I gave them the same split as the sort merge join, which is also what my cost model already assumed. I added a test with 10-page inputs at B = 4. Every number in my reports came out the same after the fix.
+
+On Nov 11 a TA said on the forum that the companion files (traces, plan schemas, sample catalog, dataset, workload) won't be posted, and that we should use our own inputs and document them. My reports already used my own data, so I added that reply to them, a table of the plan format I assumed to `docs/DESIGN_M2.md`, and a note on the logical plan schema to `docs/DESIGN_M3.md`.

@@ -2,6 +2,8 @@
 
 All numbers come from `python3 -m experiments.m2_measure --out experiments/results/m2.json --plot docs/m2_crossover.svg`. Tables are (INT, VARCHAR(200)) rows, 19 per page, with random join keys. Measured I/O is page reads plus writes for the whole plan, scans included.
 
+The handout says a dataset and sample plans are published with it, but they never were. A TA said on the forum (Nov 11) that they won't be and that we should use our own inputs and document them. So every table and plan here is my own, built by `experiments/m2_measure.py` from fixed seeds. The plan format my executor reads is in the last section of `DESIGN_M2.md`.
+
 ## Joins against the formulas
 
 M = N. Each cell is measured / formula. For sort merge I used the textbook sort(X) = 2X per pass.

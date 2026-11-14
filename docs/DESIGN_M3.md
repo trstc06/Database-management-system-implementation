@@ -38,6 +38,8 @@ Comparisons need the same type on both sides. AVG gives a REAL, which can be com
 
 ## Plan fields the handout doesn't name
 
+The handout says a logical plan JSON schema and a sample catalog are published with it. They never were, and a TA said on the forum (Nov 11) that they won't be. So my node and field names follow the examples in Section 5 exactly, and I tested against catalogs I made myself (the tables in `tests/sql/helpers.py`, shaped like the handout's Emp and Dept). These are the fields I had to choose:
+
 - `limit` uses `"n"`, since Module 2 says limit returns "the first n tuples".
 - An `AS` on a plain column adds `"aliases"` to the project, a list the same length as `"columns"` with `null` where there is no alias. It is left out when nothing is renamed.
 - `group_by` aggregates are `[function, column or "*", name]`.

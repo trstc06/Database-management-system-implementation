@@ -38,3 +38,25 @@ Pass 0 runs are as many pages as the free frames allow. Because the input page t
 ## Distinct and group by
 
 Sort mode uses my sort and checks neighbours. Hash mode keeps everything in memory if it fits. If it doesn't, it writes what it has to a temp file, splits that file and the rest of the input into partitions and handles one partition at a time.
+
+## Plan format I assumed
+
+The handout says a full JSON schema for physical plans is published with it, but it never was. A TA said on the forum (Nov 11) that the companion files won't be posted and to document what I used. So this is the format my executor checks. Field names come from the examples in Section 2 where there is one, and the rest are my choice (marked *).
+
+| op | Required fields | Optional fields |
+|---|---|---|
+| seqscan | `table` | `alias`* (scan the table under another name) |
+| filter | `condition`, `child` | |
+| project | `columns`, `child` | `aliases`* (output names, same length as `columns`, `null` for none) |
+| rename* | `to`, `child` | |
+| sort | `keys` as `[[column, "asc" or "desc"], ...]`, `child` | |
+| distinct | `mode` (`"sort"` or `"hash"`), `child` | |
+| group_by | `mode`, `keys`, `aggregates`, `child` | |
+| limit | `n`*, `child` | |
+| nested_loop_join | `left`, `right` | `condition` (no condition means a cross product) |
+| sort_merge_join, hash_join | `condition`, `left`, `right` | |
+| union_all, union, intersect, except | `left`, `right` | |
+
+- An aggregate is `[function, column or "*"]`, or `[function, column, name]`* to give the output column a name. Without a name it is `count_star`, `avg_R_salary` and so on, as in Section 2.6.
+- Every node may also carry `est_rows`, `est_pages` and `est_cost`, which Module 4 adds and I ignore.
+- A missing field, a field of the wrong type, an unknown op or an unexpected field is rejected before anything runs, with the node and its place in the tree, e.g. `node 'sort' at root.child: missing required field 'keys'`.

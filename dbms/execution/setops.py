@@ -16,6 +16,7 @@ class Union(Operator):
 
     def __init__(self, ctx, left: Operator, right: Operator) -> None:
         super().__init__(ctx, [left, right])
+        check_compatible(self.name, left, right)   # so an error names union, not union_all
         self.inner = Distinct(ctx, 'hash', UnionAll(ctx, left, right))
         self.columns = self.inner.columns
 
@@ -52,10 +53,12 @@ class SortedSetOp(Operator):
                       for side in (left, right)]
 
     def start(self) -> None:
-        left_keep = max(1, self.keep // 2)
+        # Same split as sort_merge_join (and the cost model): 1 frame stays
+        # for this operator, so at B = 4 the right sort still has 3 to merge.
+        left_keep = max(1, (self.keep - 1) // 2)
         self.sorts[0].set_limits(self.hold, left_keep)
         self.sorts[0].open()
-        self.sorts[1].set_limits(self.hold - self.sorts[0].streaming_frames(), self.keep - left_keep)
+        self.sorts[1].set_limits(self.hold - self.sorts[0].streaming_frames(), self.keep - left_keep - 1)
         self.sorts[1].open()
 
     def compare(self, a: tuple, b: tuple) -> int:

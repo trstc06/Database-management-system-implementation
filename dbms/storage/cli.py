@@ -67,6 +67,7 @@ def create_table(args) -> dict:
 def load(args) -> dict:
     with Database(Path(args.db), frames=args.frames, policy=args.policy) as db:
         loaded = load_csv(db, args.table, Path(args.file))
+        db.pool.flush_all()   # so the reported writes include every page the load dirtied
         info = db.catalog.get_table(args.table)
         return {'table': info.name, 'rows_loaded': loaded, 'num_pages': info.num_pages,
                 'num_tuples': info.num_tuples, 'stats': db.pool.stats()}

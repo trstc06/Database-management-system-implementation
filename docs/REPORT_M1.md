@@ -16,7 +16,7 @@ They match because my layout adds nothing per record except the 4 byte slot, whi
 
 ## Replacement policies
 
-The handout says five traces are published with it, but the only files attached to the project are the four module pages. A TA (Abdelghny Orogat) confirmed this on the course forum on Oct 19. Trace 3 is the only one the handout describes, so I rebuilt it exactly: 80 pages scanned in order, ten times (800 fetches). The other four traces are my own, built in `experiments/m1_measure.py`. The random ones use seed 3005, so every run gives the same traces.
+The handout says five traces are published with it, but the only files attached to the project are the four module pages. A TA (Abdelghny Orogat) confirmed this on the course forum on Oct 19, and on Nov 11 he said the files won't be posted and that we should use our own inputs and document them. Trace 3 is the only one the handout describes, so I rebuilt it exactly: 80 pages scanned in order, ten times (800 fetches). The other four traces are my own, built in `experiments/m1_measure.py`. The random ones use seed 3005, so every run gives the same traces.
 
 - **own 1, uniform:** 2,000 fetches, each a random page out of 500. The file is bigger than every B.
 - **own 2, hot set:** 2,000 fetches over 500 pages. Each fetch has a 90% chance of going to the first 50 pages (10% of the file).
