@@ -4,6 +4,7 @@ Plans are built bottom to top in the canonical order: FROM, WHERE,
 GROUP BY, HAVING, SELECT (project, then distinct), ORDER BY, LIMIT. Set
 operators join whole blocks. Nothing is moved or optimized here.
 """
+from __future__ import annotations
 
 from ..common.schema import INT, MAX_VARCHAR, VARCHAR, Column
 from ..ra.serialize import condition_to_text

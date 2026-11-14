@@ -8,6 +8,7 @@ estimation quality, optimized against unoptimized I/O, each rewrite rule
 switched off, and the correlated-column case. Every actual number comes
 from running the plan in the Module 2 executor.
 """
+from __future__ import annotations
 
 import argparse
 import json

@@ -5,6 +5,7 @@ their case. Numbers are integers with an optional sign, strings are single
 quoted with '' for a quote, and -- starts a comment to the end of the line.
 Operators use maximal munch, so <=, >= and <> are single tokens.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from ..common.errors import DbError

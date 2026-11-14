@@ -1,6 +1,6 @@
 # Architecture
 
-This is a small database system in Python 3.13 with only the standard library. SQL goes in and rows come out. `./bin/dbms --db DIR` opens a prompt. Each module also still has its own tool (`ra`, `storage`, `exec`, `sql`, `opt`).
+This is a small database system in Python (3.9 or newer) with only the standard library. SQL goes in and rows come out. `./bin/dbms --db DIR` opens a prompt. Each module also still has its own tool (`ra`, `storage`, `exec`, `sql`, `opt`).
 
 ## The whole system
 

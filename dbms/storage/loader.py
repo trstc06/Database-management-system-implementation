@@ -6,6 +6,7 @@ double quotes stand for one. Blank lines are skipped, so a one-column
 VARCHAR empty string must be written "". The file is checked completely
 before the first insert, so a bad line leaves the table unchanged.
 """
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Iterator

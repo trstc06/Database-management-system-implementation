@@ -7,6 +7,7 @@ ANALYZE table, SET frames = n and LOAD table FROM file. Each statement
 opens the database with a cold buffer pool of the current frame count,
 so the page I/O it reports does not depend on what ran before it.
 """
+from __future__ import annotations
 
 import time
 from dataclasses import dataclass

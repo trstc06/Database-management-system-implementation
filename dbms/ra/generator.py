@@ -1,4 +1,5 @@
 """Write deterministic R(a,b) and S(b,c) inputs with an exact match count."""
+from __future__ import annotations
 
 import argparse
 import sys

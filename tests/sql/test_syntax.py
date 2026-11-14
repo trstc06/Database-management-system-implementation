@@ -1,4 +1,5 @@
 """Lexer and parser: Section 1 rules, precedence, statements and syntax errors."""
+from __future__ import annotations
 
 import unittest
 from dbms.common.errors import DbError

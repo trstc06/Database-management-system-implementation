@@ -4,6 +4,7 @@ union is union_all followed by a hash distinct. intersect and except sort
 both inputs on every column, like a sort merge join, and walk them in step,
 so neither side is ever held whole in memory.
 """
+from __future__ import annotations
 
 from .aggregate import Distinct
 from .base import END, Operator

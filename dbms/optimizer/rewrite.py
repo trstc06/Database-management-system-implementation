@@ -11,6 +11,7 @@
 
 `rules` says which are on, so the report can turn them off one at a time.
 """
+from __future__ import annotations
 
 from . import logical as lg
 

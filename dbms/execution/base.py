@@ -11,6 +11,7 @@ If `keep` is below what the operator needs to stream (`min_keep`), it does
 all its work inside open with `hold` frames, writes its output to a temp
 file and streams that back with one frame.
 """
+from __future__ import annotations
 
 from ..common.errors import ExecutionError
 from ..common.schema import Column

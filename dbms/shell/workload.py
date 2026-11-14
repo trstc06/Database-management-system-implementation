@@ -2,6 +2,7 @@
 the result row count, the page I/O, the wall time, and the estimated
 against actual rows at the root.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path

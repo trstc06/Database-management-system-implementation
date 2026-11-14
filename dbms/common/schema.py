@@ -5,6 +5,7 @@ qualified name `t.c` is always available. `show_qualifier` only affects how
 the relational algebra layer prints a column, keeping the Bonus 1 display
 rule: base-table columns print bare until a product makes them ambiguous.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from .errors import ExecutionError

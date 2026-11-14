@@ -8,6 +8,7 @@ library modules (tokenizer, parser, tree, operators) do neither.
     bin/ra --tokens QUERY
     bin/ra --tokens-file FILE
 """
+from __future__ import annotations
 
 import argparse
 import json

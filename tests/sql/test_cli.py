@@ -1,4 +1,5 @@
 """The sql command: parse, compile and check, with real catalogs."""
+from __future__ import annotations
 
 import json
 import subprocess

@@ -3,6 +3,7 @@
 Plans are plain dicts in the Module 3 shape. Nothing here changes a plan
 in place; every function returns new dicts.
 """
+from __future__ import annotations
 
 from ..common.errors import DbError
 from ..ra.parser import parse_condition

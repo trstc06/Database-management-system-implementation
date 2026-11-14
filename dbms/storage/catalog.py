@@ -16,6 +16,7 @@ values using the column's type.
 
 num_pages counts data pages only, not directory pages.
 """
+from __future__ import annotations
 
 import struct
 from dataclasses import dataclass, replace

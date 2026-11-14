@@ -6,6 +6,7 @@ and 4 reuse: plan JSON carries conditions such as "R.a > 500 and R.b = 'cs'".
 Condition keywords (and, or, not) ignore case so SQL's AND/OR/NOT also read;
 query operators keep Bonus 1's lowercase spelling.
 """
+from __future__ import annotations
 
 from ..common.errors import ParseError
 from .tokenizer import Token, tokenize

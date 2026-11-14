@@ -5,6 +5,7 @@ node and where it is, e.g. "node 'filter' at root.child: missing field
 'condition'". Building resolves every table and column, so a bad name is
 rejected before any page is read.
 """
+from __future__ import annotations
 
 from ..common.errors import DbError, ExecutionError
 from .aggregate import Distinct, GroupBy

@@ -1,4 +1,5 @@
 """Describe the raw structure of one page, for `storage layout`."""
+from __future__ import annotations
 
 from .database import Table
 from .heap import NO_PAGE, DirectoryPage

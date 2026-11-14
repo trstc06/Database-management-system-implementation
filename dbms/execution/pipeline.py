@@ -1,4 +1,5 @@
 """Pipelined operators: seqscan, filter, project, limit and union_all."""
+from __future__ import annotations
 
 from dataclasses import replace
 from ..common.errors import ExecutionError

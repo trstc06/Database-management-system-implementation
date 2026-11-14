@@ -6,6 +6,7 @@ partitions by an FNV-1a hash of the key, then builds one table of entries
 (distinct tuples or group states) per partition. A partition whose table
 still does not fit is split again with a new seed, up to depth 2.
 """
+from __future__ import annotations
 
 from itertools import chain
 from ..common.errors import ExecutionError

@@ -3,6 +3,7 @@
 A semicolon inside a quoted string or after -- on a line does not end a
 statement. Hand-written, like the SQL lexer, so no regular expressions.
 """
+from __future__ import annotations
 
 
 def split_statements(text: str) -> tuple[list[str], str]:

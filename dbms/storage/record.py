@@ -6,6 +6,7 @@ little-endian.
     INT          4 bytes, signed two's complement
     VARCHAR(n)   2 byte unsigned length L, then L bytes of UTF-8, L <= n <= 255
 """
+from __future__ import annotations
 
 import struct
 from ..common.errors import DbError

@@ -7,6 +7,7 @@
 
 Statements end with a semicolon. Type quit or exit (or Ctrl-D) to leave.
 """
+from __future__ import annotations
 
 import argparse
 import sys

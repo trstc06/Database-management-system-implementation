@@ -17,6 +17,7 @@ Where I changed the handout's formulas to match what Module 2 does:
   2(M + N) for each level of re-partitioning when a partition is bigger
   than the B - 1 frames it can build in (up to depth 2, like Module 2).
 """
+from __future__ import annotations
 
 import math
 

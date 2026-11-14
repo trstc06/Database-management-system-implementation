@@ -5,6 +5,7 @@ own limit stops a plan from holding more than B pages. A Workspace only
 admits as many tuples as would fill its pages, counting each tuple's
 encoded size plus its 4 byte slot.
 """
+from __future__ import annotations
 
 import shutil
 import struct

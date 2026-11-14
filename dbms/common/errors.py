@@ -5,6 +5,7 @@ name, ambiguity, type, aggregate, schema) or a module-specific one such as
 storage or plan. The string form keeps the Bonus 1 wording so the original
 cases still read the same; `unified` gives the M3 one-line format.
 """
+from __future__ import annotations
 
 
 class DbError(Exception):

@@ -4,6 +4,7 @@ Every physical node carries est_rows, est_pages and est_cost, where
 est_cost is the estimated I/O of the whole subtree under it, so the root's
 est_cost is the plan's predicted total. Module 2 ignores these fields.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from ..common.errors import DbError

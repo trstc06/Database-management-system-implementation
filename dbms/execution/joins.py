@@ -1,4 +1,5 @@
 """Block nested loop, sort merge and Grace hash joins (Sections 2.7 to 2.9)."""
+from __future__ import annotations
 
 from ..common.errors import ExecutionError
 from ..common.schema import check_unique, resolve

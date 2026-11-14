@@ -7,6 +7,7 @@ Tables use rows of (INT, VARCHAR(200)) so a page holds 19 tuples. That keeps
 block nested loop's |R| x |S| comparisons small enough to run in Python
 while the page counts stay large. Every number comes from running plans.
 """
+from __future__ import annotations
 
 import argparse
 import json

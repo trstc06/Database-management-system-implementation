@@ -6,6 +6,7 @@ logical plans use the same scanner, so it accepts both `!=` and the SQL
 spelling `<>`. Numbers are integers only, because INT is the only numeric
 type in this project.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from ..common.errors import LexicalError

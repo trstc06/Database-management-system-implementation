@@ -1,4 +1,5 @@
 """Text output for physical plans and DP tables."""
+from __future__ import annotations
 
 INDENT = '  '
 

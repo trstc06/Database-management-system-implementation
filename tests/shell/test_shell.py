@@ -1,4 +1,5 @@
 """The integrated shell: every command in Section 6, scripts, the workload report."""
+from __future__ import annotations
 
 import subprocess
 import tempfile

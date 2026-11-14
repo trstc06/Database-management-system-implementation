@@ -11,6 +11,7 @@ A predicate is applied at the first join where all its columns are
 present. After each join, columns nobody above needs are projected away
 (when rule 6 is on), so later joins see smaller inputs.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from . import estimate as est

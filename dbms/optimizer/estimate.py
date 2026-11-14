@@ -8,6 +8,7 @@ That is the independence assumption.
 Defaults when a column has no statistics: = keeps 1/10, a range keeps
 1/3, any join predicate that is not column = column keeps 1/10.
 """
+from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field, replace

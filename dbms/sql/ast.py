@@ -1,4 +1,5 @@
 """Parse tree for the SQL subset. Every node remembers where it started."""
+from __future__ import annotations
 
 from dataclasses import dataclass
 

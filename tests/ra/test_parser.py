@@ -1,4 +1,5 @@
 """Required parsing cases and checks for the documented grammar."""
+from __future__ import annotations
 
 import unittest
 from contextlib import redirect_stderr, redirect_stdout

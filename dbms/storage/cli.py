@@ -6,6 +6,7 @@
     storage layout       --db DIR --table R --page 3
     storage trace        --db DIR --file trace.txt --frames 16 --policy lru|clock --json
 """
+from __future__ import annotations
 
 import argparse
 import itertools

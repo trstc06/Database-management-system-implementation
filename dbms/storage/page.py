@@ -13,6 +13,7 @@ A slot with offset 0 is dead. Slots are never reused or renumbered, so a
 rid (page id, slot number) stays valid. Deleting does not reclaim space;
 there is no compaction.
 """
+from __future__ import annotations
 
 import struct
 from typing import Iterator

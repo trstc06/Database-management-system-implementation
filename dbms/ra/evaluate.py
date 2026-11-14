@@ -1,4 +1,5 @@
 """Evaluate a relational algebra tree over any mapping of named sources."""
+from __future__ import annotations
 
 from time import perf_counter
 from typing import Mapping

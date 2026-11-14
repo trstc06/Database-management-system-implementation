@@ -1,4 +1,5 @@
 """The worked examples in Sections 2, 3 and 5.1."""
+from __future__ import annotations
 
 import math
 import unittest

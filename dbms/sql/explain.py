@@ -1,4 +1,5 @@
 """Indented text for parse trees (sql parse) and logical plans (sql compile)."""
+from __future__ import annotations
 
 import json
 from ..ra.serialize import condition_to_text

@@ -1,4 +1,5 @@
 """The Section 6 checklist, plus the worked examples in 2.5 and 2.8."""
+from __future__ import annotations
 
 import unittest
 from dbms.common.errors import DbError

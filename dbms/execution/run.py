@@ -1,4 +1,5 @@
 """Run a plan end to end and report rows, totals and per node counters."""
+from __future__ import annotations
 
 from dataclasses import dataclass
 from ..common.errors import ExecutionError

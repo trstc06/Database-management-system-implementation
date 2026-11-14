@@ -5,6 +5,7 @@ id and counts every call. The file has no header outside its pages.
 `NullDisk` stands in for a file when replaying a trace: every page reads as
 zeros and nothing is stored.
 """
+from __future__ import annotations
 
 from pathlib import Path
 from ..common.errors import DbError

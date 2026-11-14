@@ -7,6 +7,7 @@
 --catalog is accepted as another name for --db, and either may point at a
 database folder or a JSON catalog file.
 """
+from __future__ import annotations
 
 import argparse
 import json

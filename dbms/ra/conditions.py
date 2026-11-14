@@ -6,6 +6,7 @@ short-circuit. Comparison is same-type only: INT against VARCHAR is an
 error for every operator, including equality. Python compares str by code
 point, which is the same order as comparing the UTF-8 bytes.
 """
+from __future__ import annotations
 
 import operator
 from typing import Callable

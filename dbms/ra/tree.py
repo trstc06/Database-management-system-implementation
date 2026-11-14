@@ -8,6 +8,7 @@ Node kinds:
   operands    Attr, Num, Str
   files       RelationFile, Definition, Row
 """
+from __future__ import annotations
 
 from dataclasses import dataclass, field
 from .tokenizer import Token

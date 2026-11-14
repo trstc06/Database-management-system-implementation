@@ -10,6 +10,7 @@ The only files published with the project are the module pages, so without
 handout describes it (a sequential scan of an 80 page file repeated ten
 times) and four of my own, made from a fixed seed so every run is the same.
 """
+from __future__ import annotations
 
 import argparse
 import json

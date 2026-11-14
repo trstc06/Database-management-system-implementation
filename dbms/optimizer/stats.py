@@ -9,6 +9,7 @@ values is never split across two buckets. That keeps "find the bucket
 holding v" well defined, at the cost of fewer than k buckets when one
 value is very common.
 """
+from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field

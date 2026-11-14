@@ -5,6 +5,7 @@ COUNT(*) and function_table_column for the rest, like avg_Emp_salary.
 The same aggregate written twice without an alias is computed once, so
 HAVING COUNT(*) > 5 reuses the select list's COUNT(*) AS n.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 from ..common.schema import INT, Column

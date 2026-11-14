@@ -1,4 +1,5 @@
 """Build small databases on disk for the execution tests."""
+from __future__ import annotations
 
 import random
 import tempfile

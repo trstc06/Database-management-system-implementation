@@ -9,6 +9,7 @@
 is compiled by Module 3 first. --disable-rule N (repeatable) turns a
 rewrite rule off.
 """
+from __future__ import annotations
 
 import argparse
 import json

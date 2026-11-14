@@ -1,4 +1,5 @@
 """A small catalog in the shape of the Module 3 examples."""
+from __future__ import annotations
 
 from dbms.common.errors import DbError
 from dbms.sql.scope import json_column

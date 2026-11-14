@@ -13,6 +13,7 @@ Every page access goes through the buffer pool. A scan copies one
 directory page's list of data page ids, unpins it, and then visits the
 data pages one at a time, so it never holds more than one pinned page.
 """
+from __future__ import annotations
 
 import struct
 from typing import Iterator

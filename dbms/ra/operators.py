@@ -12,6 +12,7 @@ Projection keeps duplicates. Duplicate removal is its own operator,
 These in-memory operators are the reference semantics; Module 2 runs the
 same algebra under a page budget.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from typing import Callable, Iterator, Protocol

@@ -4,6 +4,7 @@ One method per grammar rule. Precedence and associativity come from the
 shape of the rules: OR is made of ANDs, AND is made of NOTs, and set
 operators are a left to right loop over select blocks.
 """
+from __future__ import annotations
 
 from ..common.errors import DbError
 from ..common.schema import INT, VARCHAR

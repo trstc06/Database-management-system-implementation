@@ -4,6 +4,7 @@ The catalog has its own small buffer pool, so the counters of the table
 pool (the ones `storage scan` reports) count table pages only and do not
 depend on how large the catalog is. Both pools are flushed on close.
 """
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Iterator

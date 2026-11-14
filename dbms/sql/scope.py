@@ -4,6 +4,7 @@ A scope is the list of FROM entries, each a name (alias or table name)
 with its columns. Columns are common.schema.Column values. A column made
 by the query itself, like an aggregate or an AS name, has qualifier None.
 """
+from __future__ import annotations
 
 import json
 from dataclasses import dataclass, replace

@@ -3,6 +3,7 @@
     exec run   --db DIR --plan plan.json --frames 32 [--policy lru|clock] --json
     exec trace --db DIR --plan plan.json --frames 32
 """
+from __future__ import annotations
 
 import argparse
 import json

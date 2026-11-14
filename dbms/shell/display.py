@@ -6,6 +6,7 @@ exact text formats their handouts describe.
 Results are a lined-up table: text on the left, numbers on the right.
 Plans are a drawn tree with one header row, read from the bottom up.
 """
+from __future__ import annotations
 
 from ..optimizer.explain import node_label
 

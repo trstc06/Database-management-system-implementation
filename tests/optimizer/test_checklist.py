@@ -1,4 +1,5 @@
 """The Section 8 checklist, on a small copy of my own dataset."""
+from __future__ import annotations
 
 import copy
 import tempfile

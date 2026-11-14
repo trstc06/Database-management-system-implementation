@@ -5,6 +5,7 @@ repeated row stays repeated. Column types come from the values: a number
 makes the column INT, text makes it VARCHAR, and an empty table's columns
 have no known type.
 """
+from __future__ import annotations
 
 from dataclasses import replace
 from ..common.errors import ExecutionError

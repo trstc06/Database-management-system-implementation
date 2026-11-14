@@ -6,6 +6,7 @@ object with an "op" field, unary nodes have "child", binary nodes have
 condition parser reads. `to_json` and `from_json` are inverses: reading back
 what was written gives an equal tree.
 """
+from __future__ import annotations
 
 from ..common.errors import DbError, ExecutionError
 from .parser import parse_attribute, parse_condition

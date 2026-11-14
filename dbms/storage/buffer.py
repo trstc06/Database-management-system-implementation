@@ -10,6 +10,7 @@ whether a write comes from an eviction or from flush_all. `new_page` is
 neither a hit nor a miss; if it has to write out a dirty victim, that write
 counts.
 """
+from __future__ import annotations
 
 from dataclasses import dataclass, field
 from ..common.errors import DbError

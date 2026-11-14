@@ -5,6 +5,7 @@ miss. `choose_victim` returns a frame index whose pin count is zero, or
 None when every frame is pinned. An empty frame is always a candidate, so
 the first B misses fill the pool without evicting anything.
 """
+from __future__ import annotations
 
 from collections import OrderedDict
 

@@ -5,6 +5,7 @@ Four tables shaped like the handout's examples. Emp.salary is built from
 Emp.age (salary = 1000 x age plus up to 4,999), so the two are strongly
 correlated and AND on both breaks the independence assumption.
 """
+from __future__ import annotations
 
 import random
 from pathlib import Path
@@ -47,3 +48,19 @@ def build(directory: Path, sizes: dict = SIZES, seed: int = 3005) -> Path:
                 table.insert(row)
             db.save_counts(table, len(data[name]))
     return Path(directory)
+
+
+def main() -> None:
+    """python3 -m experiments.m4_data --db DIR builds the sample database in DIR."""
+    import argparse
+    parser = argparse.ArgumentParser(description='Build the sample Emp, Dept, Proj and Site database.')
+    parser.add_argument('--db', required=True, help='folder to create the database in (must not exist yet)')
+    directory = Path(parser.parse_args().db)
+    if directory.exists():
+        parser.error(f'{directory} already exists; pick a new folder or delete it first')
+    build(directory)
+    print(f'built the sample database in {directory}: ' + ', '.join(f'{n} {SIZES[n]} rows' for n in SCHEMAS))
+
+
+if __name__ == '__main__':
+    main()

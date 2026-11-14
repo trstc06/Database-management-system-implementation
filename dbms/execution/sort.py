@@ -5,6 +5,7 @@ run. Merge passes take (frames - 1) runs at a time with one output frame,
 and a single leftover run is carried forward untouched. The last merge
 streams to the parent, so it may merge at most `keep` runs.
 """
+from __future__ import annotations
 
 import heapq
 from functools import cmp_to_key
