@@ -1,5 +1,7 @@
 # A small database system (COMP 3005, Project 2)
 
+**Demo video:** https://youtu.be/DzHiHRwjZ8s
+
 This is a working database system that I wrote from scratch in Python. You type SQL, and it gives back rows, the same way PostgreSQL does, but much smaller. Nothing is borrowed: the parser, the optimizer, the query engine and the on-disk storage are all my own code, using only Python's standard library.
 
 It is built in four parts, called modules, plus a shell that joins them together:
